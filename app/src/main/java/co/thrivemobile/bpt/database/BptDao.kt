@@ -14,7 +14,7 @@ interface BptDao {
     @Query("SELECT * FROM DAYS ORDER BY id")
     fun getAllDays(): List<Day>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEntry(entry: Entry)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

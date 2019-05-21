@@ -6,7 +6,7 @@ import org.threeten.bp.OffsetTime
 import org.threeten.bp.format.DateTimeFormatter
 
 object BptTypeConverters {
-    private val dateFormatter = DateTimeFormatter.ISO_OFFSET_DATE
+    private val dateFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
     private val timeFormatter = DateTimeFormatter.ISO_OFFSET_TIME
 
     @TypeConverter
