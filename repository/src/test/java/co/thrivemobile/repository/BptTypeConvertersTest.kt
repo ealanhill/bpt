@@ -1,4 +1,4 @@
-package co.thrivemobile.bpt.database
+package co.thrivemobile.repository
 
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull

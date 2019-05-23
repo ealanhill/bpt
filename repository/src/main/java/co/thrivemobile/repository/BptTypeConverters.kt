@@ -1,4 +1,4 @@
-package co.thrivemobile.bpt.database
+package co.thrivemobile.repository
 
 import androidx.room.TypeConverter
 import org.threeten.bp.OffsetDateTime

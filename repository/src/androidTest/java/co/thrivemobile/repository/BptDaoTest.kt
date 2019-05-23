@@ -1,17 +1,12 @@
-package co.thrivemobile.bpt
+package co.thrivemobile.repository
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import co.thrivemobile.bpt.database.BptDatabase
-import co.thrivemobile.bpt.database.Day
-import co.thrivemobile.bpt.database.Entry
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.OffsetDateTime
@@ -20,8 +15,6 @@ import org.threeten.bp.ZoneOffset
 
 @RunWith(AndroidJUnit4::class)
 class BptDaoTest {
-
-    @get:Rule val mActivityRule = ActivityTestRule(MainActivity::class.java)
 
     private lateinit var bptDatabase: BptDatabase
 
@@ -42,7 +35,7 @@ class BptDaoTest {
     fun when_we_insert_an_entry_it_is_actually_inserted() {
         val entry = Entry(
             id = 1,
-            date = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00")),
+            date = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
             time = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
         )
         bptDatabase.bptDao().insertEntry(entry)
@@ -62,7 +55,7 @@ class BptDaoTest {
         bptDatabase.bptDao().insertEntry(entry)
         entry = Entry(
             id = 1,
-            date = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00")),
+            date = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
             time = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
         )
         bptDatabase.bptDao().insertEntry(entry)
@@ -83,7 +76,7 @@ class BptDaoTest {
         }
         entry2 = Entry(
             id = 2,
-            date = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00")),
+            date = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
             time = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
         )
         bptDatabase.bptDao().insertEntry(entry2)
@@ -106,7 +99,7 @@ class BptDaoTest {
     fun when_same_day_is_inserted_then_new_one_is_ignored() {
         var day = Day(id = 1, day = null)
         bptDatabase.bptDao().insertDay(day)
-        day = Day(id = 1, day = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00")))
+        day = Day(id = 1, day = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00")))
         bptDatabase.bptDao().insertDay(day)
         val retrievedDay = bptDatabase.bptDao().getAllDays().first()
 
@@ -121,7 +114,7 @@ class BptDaoTest {
             insertDay(day1)
             insertDay(day2)
         }
-        day2 = Day(id = 2, day = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00")))
+        day2 = Day(id = 2, day = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00")))
         bptDatabase.bptDao().insertDay(day2)
         val retrievedDay = bptDatabase.bptDao().getAllDays()[1]
 
@@ -131,26 +124,26 @@ class BptDaoTest {
     @Test
     fun when_retrieving_all_entries_all_entries_are_returned() {
         val entries = listOf(
-                Entry(
-                    id = 1,
-                    date = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00")),
-                    time = null
-                ),
-                Entry(
-                    id = 2,
-                    date = OffsetDateTime.of(2019,5,22, 0,0,0,0, ZoneOffset.of("+02:00")),
-                    time = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
-                ),
-                Entry(
-                    id = 3,
-                    date = OffsetDateTime.of(2019,5,23, 0,0,0,0, ZoneOffset.of("+02:00")),
-                    time = null
-                ),
-                Entry(
-                    id = 4,
-                    date = OffsetDateTime.of(2019,5,24, 0,0,0,0, ZoneOffset.of("+02:00")),
-                    time = null
-                )
+            Entry(
+                id = 1,
+                date = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
+                time = null
+            ),
+            Entry(
+                id = 2,
+                date = OffsetDateTime.of(2019, 5, 22, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
+                time = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
+            ),
+            Entry(
+                id = 3,
+                date = OffsetDateTime.of(2019, 5, 23, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
+                time = null
+            ),
+            Entry(
+                id = 4,
+                date = OffsetDateTime.of(2019, 5, 24, 0, 0, 0, 0, ZoneOffset.of("+02:00")),
+                time = null
+            )
         )
         entries.forEach { bptDatabase.bptDao().insertEntry(it) }
 
@@ -163,19 +156,19 @@ class BptDaoTest {
         val days = listOf(
             Day(
                 id = 1,
-                day = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00"))
+                day = OffsetDateTime.of(2019, 5, 21, 0, 0, 0, 0, ZoneOffset.of("+02:00"))
             ),
             Day(
                 id = 2,
-                day = OffsetDateTime.of(2019,5,22, 0,0,0,0, ZoneOffset.of("+02:00"))
+                day = OffsetDateTime.of(2019, 5, 22, 0, 0, 0, 0, ZoneOffset.of("+02:00"))
             ),
             Day(
                 id = 3,
-                day = OffsetDateTime.of(2019,5,23, 0,0,0,0, ZoneOffset.of("+02:00"))
+                day = OffsetDateTime.of(2019, 5, 23, 0, 0, 0, 0, ZoneOffset.of("+02:00"))
             ),
             Day(
                 id = 4,
-                day = OffsetDateTime.of(2019,5,24, 0,0,0,0, ZoneOffset.of("+02:00"))
+                day = OffsetDateTime.of(2019, 5, 24, 0, 0, 0, 0, ZoneOffset.of("+02:00"))
             )
         )
         days.forEach { bptDatabase.bptDao().insertDay(it) }
