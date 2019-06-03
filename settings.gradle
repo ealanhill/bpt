@@ -1,1 +1,1 @@
-include ':app', ':repository', ':buildSrc'
+include ':app', ':repository', ':buildSrc', ':uicomponents'
