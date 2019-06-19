@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -33,6 +36,7 @@ dependencies {
 
     implementation "com.google.android.material:material:$Versions.materialComponents"
     implementation "com.android.support.constraint:constraint-layout:$Versions.constraintLayout"
+    implementation "com.robinhood.spark:spark:$Versions.spark"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$Versions.junit"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$Versions.junit"

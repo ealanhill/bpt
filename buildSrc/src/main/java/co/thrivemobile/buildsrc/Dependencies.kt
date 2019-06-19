@@ -6,6 +6,7 @@ object Versions {
     val threetenabp = "1.2.0"
     val junit = "5.3.2"
     val materialComponents = "1.0.0"
-    val constraintLayout = "1.1.3"
+    val constraintLayout = "2.0.0-beta2"
     val appComponent = "1.0.2"
+    val spark = "1.2.0"
 }
