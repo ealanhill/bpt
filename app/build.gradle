@@ -29,10 +29,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":uicomponents")
+    implementation project(":repository")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Versions.kotlin"
     implementation "androidx.appcompat:appcompat:$Versions.appComponent"
     implementation "androidx.core:core-ktx:$Versions.ktxCore"
+
+    // Time
+    implementation "com.jakewharton.threetenabp:threetenabp:$Versions.threetenabp"
 
     implementation "com.google.android.material:material:$Versions.materialComponents"
     implementation "com.android.support.constraint:constraint-layout:$Versions.constraintLayout"
