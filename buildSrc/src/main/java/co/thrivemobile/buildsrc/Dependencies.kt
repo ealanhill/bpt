@@ -9,4 +9,5 @@ object Versions {
     val constraintLayout = "2.0.0-beta2"
     val appComponent = "1.0.2"
     val spark = "1.2.0"
+    val koin = "2.0.1"
 }
