@@ -5,22 +5,64 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/double_standard_margin"
-        android:elevation="@dimen/card_elevation">
+        android:layout_marginStart="@dimen/double_standard_margin"
+        android:layout_marginEnd="@dimen/double_standard_margin"
+        android:layout_marginBottom="@dimen/double_standard_margin"
+        app:cardElevation="@dimen/card_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/entry_constraint_layout"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:id="@+id/clock_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clock"
+                android:tint="@color/grey"
+                android:importantForAccessibility="no"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/instructions"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/title"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/entry_card_title"
+                app:layout_constraintStart_toEndOf="@id/clock_icon"
+                app:layout_constraintTop_toTopOf="@id/clock_icon"
+                app:layout_constraintBottom_toBottomOf="@id/clock_icon"/>
+
+            <TextView
+                android:id="@+id/instructions"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="Dummy Text, to be changed later"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/entry_card_instructions"
+                app:layout_constraintTop_toBottomOf="@id/clock_icon"
+                app:layout_constraintBottom_toTopOf="@id/cta"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/cta"
+                style="@style/CTA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_card_cta"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/instructions"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

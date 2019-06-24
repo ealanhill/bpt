@@ -10,4 +10,6 @@ object Versions {
     val appComponent = "1.0.2"
     val spark = "1.2.0"
     val koin = "2.0.1"
+    val mockitoCore = "1.10.19"
+    val mockitoExtension = "2.28.2"
 }

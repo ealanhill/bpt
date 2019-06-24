@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import co.thrivemobile.bpt.databinding.FragmentStatisticsBinding
 import org.koin.android.ext.android.inject
 
@@ -23,6 +24,11 @@ class StatisticsFragment : Fragment() {
         binding = FragmentStatisticsBinding.inflate(inflater, container, false).apply {
             viewModel = statisticsViewModel
             lifecycleOwner = viewLifecycleOwner
+
+            statisticsRecyclerView.apply {
+                adapter = statisticsAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
         }
 
         statisticsViewModel.statisticsItemsData.observe(

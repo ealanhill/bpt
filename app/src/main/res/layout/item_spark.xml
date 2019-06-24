@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/background_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="125dp"
             android:background="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -22,16 +22,20 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_margin="@dimen/double_standard_margin"
-            android:elevation="@dimen/card_elevation"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <com.robinhood.spark.SparkView
                 android:id="@+id/spark_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white" />
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                app:spark_lineColor="@color/colorPrimary"
+                app:spark_cornerRadius="5dp"/>
 
         </androidx.cardview.widget.CardView>
 
