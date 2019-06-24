@@ -1,0 +1,35 @@
+package co.thrivemobile.bpt.statistics
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import co.thrivemobile.bpt.databinding.FragmentStatisticsBinding
+import org.koin.android.ext.android.inject
+
+class StatisticsFragment : Fragment() {
+
+    private lateinit var binding: FragmentStatisticsBinding
+    private val statisticsViewModel: StatisticsViewModel by inject()
+    private val statisticsAdapter = StatisticsAdapter()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentStatisticsBinding.inflate(inflater, container, false).apply {
+            viewModel = statisticsViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        statisticsViewModel.statisticsItemsData.observe(
+            viewLifecycleOwner,
+            Observer { statisticsAdapter.submitList(it) }
+        )
+
+        return binding.root
+    }
+}
