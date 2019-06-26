@@ -1,5 +1,6 @@
-package co.thrivemobile.bpt.statistics
+package co.thrivemobile.bpt.statistics.vm
 
+import co.thrivemobile.bpt.statistics.StatisticsViewModel
 import co.thrivemobile.bpt.statistics.items.EntryItem
 import co.thrivemobile.bpt.statistics.items.HourItem
 import co.thrivemobile.bpt.statistics.items.SparkItem

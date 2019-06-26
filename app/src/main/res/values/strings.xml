@@ -4,4 +4,8 @@
     <string name="entry_card_title">Energy Entry</string>
     <string name="entry_card_instructions">Input your energy, focus and motivation for right now.</string>
     <string name="entry_card_cta">Enter Data</string>
+
+    <string name="motivation">Motivation</string>
+    <string name="focus">Focus</string>
+    <string name="energy">Energy</string>
 </resources>

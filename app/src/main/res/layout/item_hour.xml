@@ -1,28 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="androidx.core.content.ContextCompat" />
+        <variable
+            name="viewModel"
+            type="co.thrivemobile.bpt.statistics.vm.HourViewModel" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/double_standard_margin"
         android:layout_marginEnd="@dimen/double_standard_margin"
-        app:cardElevation="@dimen/card_elevation">
+        app:cardElevation="@dimen/card_elevation"
+        app:cardCornerRadius="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="Dummy Text, to be changed later"
+                android:id="@+id/hour"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@{viewModel.timeLiveData}"
+                tools:text="11:00 am"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/energy_title"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/energy"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.energyTextColorData)}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/focus_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/energy_value"/>
+
+            <TextView
+                android:id="@+id/energy_value"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.energyLiveData}"
+                android:textSize="12sp"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.energyTextColorData)}"
+                tools:text="10"
+                app:layout_constraintStart_toStartOf="@id/energy_title"
+                app:layout_constraintEnd_toEndOf="@id/energy_title"
+                app:layout_constraintTop_toBottomOf="@id/energy_title"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/focus_title"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/focus"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.focusTextColorData)}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/motivation_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/focus_value"/>
+
+            <TextView
+                android:id="@+id/focus_value"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.focusLiveData}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.focusTextColorData)}"
+                android:textSize="12sp"
+                tools:text="10"
+                app:layout_constraintStart_toStartOf="@id/focus_title"
+                app:layout_constraintEnd_toEndOf="@id/focus_title"
+                app:layout_constraintTop_toBottomOf="@id/focus_title"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/motivation_title"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/motivation"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.motivationTextColorData)}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/motivation_value"/>
+
+            <TextView
+                android:id="@+id/motivation_value"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.motivationLiveData}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.motivationTextColorData)}"
+                android:textSize="12sp"
+                tools:text="10"
+                app:layout_constraintStart_toStartOf="@id/motivation_title"
+                app:layout_constraintEnd_toEndOf="@id/motivation_title"
+                app:layout_constraintTop_toBottomOf="@id/motivation_title"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
