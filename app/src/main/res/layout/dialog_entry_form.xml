@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="co.thrivemobile.bpt.entry_form.EntryFormViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/current_time"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:text="@{viewModel.timeLiveData}"
+        android:textSize="24sp"
+        tools:text="11:00 AM"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/energy_entry_layout"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/energy_entry_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:hint="@string/energy"
+        app:errorEnabled="true"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_time"
+        app:layout_constraintBottom_toTopOf="@id/focus_entry_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/energy_entry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:text="@={viewModel.energyLiveData}"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/focus_entry_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:hint="@string/focus"
+        app:errorEnabled="true"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/energy_entry_layout"
+        app:layout_constraintBottom_toTopOf="@id/motivation_entry_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/focus_entry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:text="@={viewModel.focusLiveData}"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/motivation_entry_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:hint="@string/motivation"
+        app:errorEnabled="true"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/focus_entry_layout"
+        app:layout_constraintBottom_toTopOf="@id/note_entry_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/motivation_entry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:text="@={viewModel.motivationLiveData}"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/note_entry_layout"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/standard_margin"
+        android:hint="@string/notes"
+        app:errorEnabled="true"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/motivation_entry_layout"
+        app:layout_constraintBottom_toTopOf="@id/save">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/note_entry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:text="@={viewModel.notesLiveData}"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/cancel"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:text="@string/cancel"
+        android:textSize="18sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{ () -> viewModel.onCancelSelected() }"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/save"/>
+
+    <TextView
+        android:id="@+id/save"
+        style="@style/CTA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:text="@string/save"
+        android:textSize="18sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{ () -> viewModel.onSaveSelected() }"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

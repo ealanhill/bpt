@@ -8,4 +8,9 @@
     <string name="motivation">Motivation</string>
     <string name="focus">Focus</string>
     <string name="energy">Energy</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="notes">Notes</string>
+
+    <string name="entry_form_number_error">Please enter a number from 1 to 10</string>
 </resources>
