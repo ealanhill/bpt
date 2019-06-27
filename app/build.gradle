@@ -39,7 +39,7 @@ dependencies {
     implementation "com.jakewharton.threetenabp:threetenabp:$Versions.threetenabp"
 
     implementation "com.google.android.material:material:$Versions.materialComponents"
-    implementation "com.android.support.constraint:constraint-layout:$Versions.constraintLayout"
+    implementation "androidx.constraintlayout:constraintlayout:$Versions.constraintLayout"
     implementation "com.robinhood.spark:spark:$Versions.spark"
 
     implementation "org.koin:koin-core:$Versions.koin"
