@@ -8,7 +8,7 @@ import org.threeten.bp.OffsetTime
 
 @Entity(tableName = "ENTRIES")
 data class Entry(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "date") val date: OffsetDateTime?,
     @ColumnInfo(name = "time") val time: OffsetTime?,
     @ColumnInfo(name = "energy") val energy: Int = 0,
