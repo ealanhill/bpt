@@ -11,6 +11,7 @@ import co.thrivemobile.repository.Entry
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.OffsetTime
+import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 
 class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : ViewModel() {
@@ -33,11 +34,27 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
         addSource(motivationLiveData) { validateMotivationValue(it) }
     }
 
+    val enableSubmit = MediatorLiveData<Boolean>().apply {
+        value = false
+
+        fun enableSubmit(): Boolean {
+            return validationEvent.hasNoErrors &&
+                    (energyLiveData.value?.isNotBlank() ?: false) &&
+                    (focusLiveData.value?.isNotBlank() ?: false) &&
+                    (motivationLiveData.value?.isNotBlank() ?: false)
+        }
+
+        addSource(energyLiveData) { this.value = enableSubmit() }
+        addSource(focusLiveData) { this.value = enableSubmit() }
+        addSource(motivationLiveData) { this.value = enableSubmit() }
+    }
+
     val cancelLiveEvent = SingleLiveEvent<Boolean>()
     val saveLivedata = SingleLiveEvent<Boolean>()
 
     private val validationEvent = EntryFormValidationEvent()
     private val nowString = now().format(formatter)
+    private val nowLocalDateTime = now()
 
     init {
         timeLiveData.value = nowString
@@ -49,8 +66,8 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
 
     fun onSaveSelected() {
         val newEntry = Entry(
-            date = OffsetDateTime.parse(nowString),
-            time = OffsetTime.parse(nowString),
+            date = OffsetDateTime.of(nowLocalDateTime, ZoneOffset.UTC),
+            time = OffsetTime.of(nowLocalDateTime.toLocalTime(), ZoneOffset.UTC),
             energy = energyLiveData.value?.toInt() ?: 0,
             focus = focusLiveData.value?.toInt() ?: 0,
             motivation = motivationLiveData.value?.toInt() ?: 0,

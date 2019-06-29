@@ -8,7 +8,7 @@ data class EntryFormValidationEvent(
     @StringRes var motivationErrorRes: Int? = null
 ) {
 
-    val hasErrors: Boolean
+    val hasNoErrors: Boolean
         get() {
             return energyErrorRes == null && focusErrorRes == null && motivationErrorRes == null
         }
