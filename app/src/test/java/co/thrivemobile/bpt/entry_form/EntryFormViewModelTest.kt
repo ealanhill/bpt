@@ -108,6 +108,22 @@ class EntryFormViewModelTest {
     }
 
     @Test
+    @DisplayName("When user enters a blank string for energy then show the error")
+    fun energyBlankString() {
+        viewModel.energyLiveData.value = ""
+
+        viewModel.errorLiveData.observeOnce {
+            assertNotNull(it)
+            assertTrue(it.energyErrorRes == R.string.entry_form_number_error)
+            assertFalse(it.hasNoErrors)
+        }
+
+        viewModel.enableSubmit.observeOnce {
+            assertFalse(it)
+        }
+    }
+
+    @Test
     @DisplayName("When user enters an energy value at the edge of the value range don't show error")
     fun energyEdgeCase() {
         viewModel.energyLiveData.value = "1"
@@ -182,6 +198,22 @@ class EntryFormViewModelTest {
     }
 
     @Test
+    @DisplayName("When user enters a blank string for focus then show the error")
+    fun focusBlankString() {
+        viewModel.focusLiveData.value = ""
+
+        viewModel.errorLiveData.observeOnce {
+            assertNotNull(it)
+            assertTrue(it.focusErrorRes == R.string.entry_form_number_error)
+            assertFalse(it.hasNoErrors)
+        }
+
+        viewModel.enableSubmit.observeOnce {
+            assertFalse(it)
+        }
+    }
+
+    @Test
     @DisplayName("When user enters a focus value at the edge of the value range don't show error")
     fun focusEdgeCase() {
         viewModel.focusLiveData.value = "1"
@@ -243,6 +275,22 @@ class EntryFormViewModelTest {
     @DisplayName("When user enters a value greater than 10 for motivation then show the error")
     fun invalidMotivationValueTen() {
         viewModel.motivationLiveData.value = "15"
+
+        viewModel.errorLiveData.observeOnce {
+            assertNotNull(it)
+            assertTrue(it.motivationErrorRes == R.string.entry_form_number_error)
+            assertFalse(it.hasNoErrors)
+        }
+
+        viewModel.enableSubmit.observeOnce {
+            assertFalse(it)
+        }
+    }
+
+    @Test
+    @DisplayName("When user enters a blank string for motivation then show the error")
+    fun motivationBlankString() {
+        viewModel.motivationLiveData.value = ""
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)

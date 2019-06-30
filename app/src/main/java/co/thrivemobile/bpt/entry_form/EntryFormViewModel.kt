@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.R
 import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.bpt.util.SingleLiveEvent
+import co.thrivemobile.bpt.util.ioThread
 import co.thrivemobile.repository.BptDao
 import co.thrivemobile.repository.Entry
 import org.threeten.bp.LocalDateTime
@@ -73,34 +74,39 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
             motivation = motivationLiveData.value?.toInt() ?: 0,
             notes = notesLiveData.value ?: ""
         )
-        repo.insertEntry(newEntry)
+        ioThread {
+            repo.insertEntry(newEntry)
+        }
         saveLivedata.value = true
     }
 
     private fun validateEnergyValue(energy: String?) {
-        validationEvent.energyErrorRes = if (energy == null || (energy.toInt() in 1..10)) {
-            null
-        } else {
-            R.string.entry_form_number_error
-        }
+        validationEvent.energyErrorRes =
+            if (energy == null || (energy.isNotBlank() && energy.toInt() in 1..10)) {
+                null
+            } else {
+                R.string.entry_form_number_error
+            }
         errorLiveData.value = validationEvent
     }
 
     private fun validateFocusValue(focus: String?) {
-        validationEvent.focusErrorRes = if (focus == null || (focus.toInt() in 1..10)) {
-            null
-        } else {
-            R.string.entry_form_number_error
-        }
+        validationEvent.focusErrorRes =
+            if (focus == null || (focus.isNotBlank() && focus.toInt() in 1..10)) {
+                null
+            } else {
+                R.string.entry_form_number_error
+            }
         errorLiveData.value = validationEvent
     }
 
     private fun validateMotivationValue(motivation: String?) {
-        validationEvent.motivationErrorRes = if (motivation == null || (motivation.toInt() in 1..10)) {
-            null
-        } else {
-            R.string.entry_form_number_error
-        }
+        validationEvent.motivationErrorRes =
+            if (motivation == null || (motivation.isNotBlank() && motivation.toInt() in 1..10)) {
+                null
+            } else {
+                R.string.entry_form_number_error
+            }
         errorLiveData.value = validationEvent
     }
 }

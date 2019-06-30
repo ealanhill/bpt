@@ -7,5 +7,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#BDBDBD</color>
     <color name="honey_teriyaki">#F27013</color>
+    <color name="honey_teriyaki_disable">#80F27013</color>
     <color name="midwinter_fire">#DC0000</color>
 </resources>

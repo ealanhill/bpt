@@ -17,8 +17,9 @@ import co.thrivemobile.bpt.statistics.vh.HourViewHolder
 import co.thrivemobile.bpt.statistics.vh.SparkViewHolder
 import co.thrivemobile.bpt.statistics.vh.StatisticsViewHolder
 
-class StatisticsAdapter :
-        ListAdapter<StatisticsItem, StatisticsViewHolder<StatisticsItem>>(DIFF_CALLBACK) {
+class StatisticsAdapter(
+    private val launchEntryForm: () -> Unit
+) : ListAdapter<StatisticsItem, StatisticsViewHolder<StatisticsItem>>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StatisticsItem>() {
@@ -86,7 +87,7 @@ class StatisticsAdapter :
         parent: ViewGroup
     ): EntryViewHolder {
         val binding = ItemEntryBinding.inflate(inflater, parent, false)
-        return EntryViewHolder(binding)
+        return EntryViewHolder(binding) { launchEntryForm() }
     }
 
     private fun createHourViewHolder(

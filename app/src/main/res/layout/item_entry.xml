@@ -9,17 +9,17 @@
         android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginTop="@dimen/standard_margin"
         android:layout_marginBottom="@dimen/double_standard_margin"
-        app:cardElevation="@dimen/card_elevation">
+        app:cardElevation="@dimen/card_elevation"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/entry_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="100dp"
-            android:padding="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless">
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/clock_icon"

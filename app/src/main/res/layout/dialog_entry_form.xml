@@ -22,6 +22,7 @@
             android:text="@{viewModel.timeLiveData}"
             android:textSize="24sp"
             tools:text="11:00 AM"
+            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +33,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:hint="@string/energy"
             app:errorEnabled="true"
             app:boxStrokeColor="@color/colorPrimary"
@@ -55,7 +57,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:hint="@string/focus"
             app:errorEnabled="true"
             app:boxStrokeColor="@color/colorPrimary"
@@ -78,7 +81,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:hint="@string/motivation"
             app:errorEnabled="true"
             app:boxStrokeColor="@color/colorPrimary"
@@ -98,9 +102,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/note_entry_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_margin="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:hint="@string/notes"
             app:errorEnabled="true"
             app:boxStrokeColor="@color/colorPrimary"
@@ -128,7 +134,8 @@
             android:textSize="18sp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="@{ () -> viewModel.onCancelSelected() }"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/save"
+            app:layout_constraintBottom_toBottomOf="@id/save"
             app:layout_constraintEnd_toStartOf="@id/save"/>
 
         <TextView
@@ -139,8 +146,11 @@
             android:layout_margin="@dimen/standard_margin"
             android:text="@string/save"
             android:textSize="18sp"
+            android:textColor="@drawable/selectable_orange"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:enabled="@{viewModel.enableSubmit}"
             android:onClick="@{ () -> viewModel.onSaveSelected() }"
+            app:layout_constraintTop_toBottomOf="@id/note_entry_layout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -8,13 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.thrivemobile.bpt.databinding.FragmentStatisticsBinding
+import co.thrivemobile.bpt.entry_form.EntryFormDialogFragment
 import org.koin.android.ext.android.inject
 
 class StatisticsFragment : Fragment() {
 
     private lateinit var binding: FragmentStatisticsBinding
     private val statisticsViewModel: StatisticsViewModel by inject()
-    private val statisticsAdapter = StatisticsAdapter()
+    private val statisticsAdapter = StatisticsAdapter { launchEntryForm() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,5 +38,13 @@ class StatisticsFragment : Fragment() {
         )
 
         return binding.root
+    }
+
+    private fun launchEntryForm() {
+        activity?.let {
+            val fragmentManager = it.supportFragmentManager
+            val entryDialogFragment = EntryFormDialogFragment()
+            entryDialogFragment.show(fragmentManager, "Entry Form")
+        }
     }
 }

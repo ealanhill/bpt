@@ -35,6 +35,12 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$Versions.appComponent"
     implementation "androidx.core:core-ktx:$Versions.ktxCore"
 
+    // Room
+    implementation "androidx.room:room-runtime:$Versions.room"
+    kapt "androidx.room:room-compiler:$Versions.room"
+
+    debugImplementation "com.amitshekhar.android:debug-db:$Versions.debugDatabase"
+
     // Time
     implementation "com.jakewharton.threetenabp:threetenabp:$Versions.threetenabp"
 
