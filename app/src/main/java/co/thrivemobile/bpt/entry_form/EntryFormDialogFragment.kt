@@ -1,25 +1,29 @@
 package co.thrivemobile.bpt.entry_form
 
-import android.graphics.Point
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.annotation.StringRes
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
+import co.thrivemobile.bpt.R
+import co.thrivemobile.bpt.base.BaseBottomDialogFragment
 import co.thrivemobile.bpt.databinding.DialogEntryFormBinding
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EntryFormDialogFragment : DialogFragment() {
+class EntryFormDialogFragment : BaseBottomDialogFragment() {
 
     private val entryFormViewModel: EntryFormViewModel by viewModel()
 
     private lateinit var binding: DialogEntryFormBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DialogEntryFormBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -30,39 +34,30 @@ class EntryFormDialogFragment : DialogFragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        entryFormViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { event ->
-            event?.let { handleValidationEvent(it) }
-        })
         entryFormViewModel.saveLivedata.observe(viewLifecycleOwner, Observer { close(it) })
         entryFormViewModel.cancelLiveEvent.observe(viewLifecycleOwner, Observer { close(it) })
+
+        setUpChips(binding.energyChipGroup)
+        setUpChips(binding.focusChipGroup)
+        setUpChips(binding.motivationChipGroup)
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onResume() {
-        dialog.window?.apply {
-            val size = Point()
-            val display = windowManager.defaultDisplay
-            display.getSize(size)
-            val width = size.x * .9
-            setLayout(width.toInt(), WindowManager.LayoutParams.WRAP_CONTENT)
-            setGravity(Gravity.CENTER)
+    private fun setUpChips(chipGroup: ChipGroup) {
+        for (i in 1..10) {
+            val chip = Chip(context).apply {
+                text = i.toString()
+                id = i
+                setTextAppearanceResource(R.style.ChipTextStyle)
+            }
+            chipGroup.addView(chip)
         }
-
-        super.onResume()
     }
 
     private fun close(shouldClose: Boolean) {
         if (shouldClose) {
             dismiss()
-        }
-    }
-
-    private fun handleValidationEvent(event: EntryFormValidationEvent) {
-        binding.apply {
-            energyEntryLayout.error = getError(event.energyErrorRes)
-            focusEntryLayout.error = getError(event.focusErrorRes)
-            motivationEntryLayout.error = getError(event.motivationErrorRes)
         }
     }
 

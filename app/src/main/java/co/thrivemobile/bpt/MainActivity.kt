@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import co.thrivemobile.bpt.databinding.ActivityMainBinding
+import co.thrivemobile.bpt.entry_form.EntryFormDialogFragment
+import co.thrivemobile.bpt.entry_form.OpenEntryForm
 import co.thrivemobile.bpt.statistics.StatisticsFragment
 import co.thrivemobile.uicomponents.SmartFragmentStatePagerAdapter
 import java.lang.IllegalArgumentException
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OpenEntryForm {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -22,6 +24,11 @@ class MainActivity : AppCompatActivity() {
             mainViewPager.adapter = PagerAdapter(supportFragmentManager)
         }
         setContentView(binding.root)
+    }
+
+    override fun openEntryForm() {
+        val entryDialogFragment = EntryFormDialogFragment()
+        entryDialogFragment.show(supportFragmentManager, "Entry Form")
     }
 
     class PagerAdapter(

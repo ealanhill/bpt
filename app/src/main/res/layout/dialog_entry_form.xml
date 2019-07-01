@@ -24,81 +24,80 @@
             tools:text="11:00 AM"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/energy_entry_layout"/>
+            app:layout_constraintBottom_toTopOf="@id/energy_label"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/energy_entry_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/energy_label"
+            style="@style/Title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginEnd="@dimen/standard_margin"
-            android:hint="@string/energy"
-            app:errorEnabled="true"
-            app:boxStrokeColor="@color/colorPrimary"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@string/energy"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/current_time"
-            app:layout_constraintBottom_toTopOf="@id/focus_entry_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_entry"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:text="@={viewModel.energyLiveData}"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/focus_entry_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintBottom_toTopOf="@id/energy_chip_group"/>
+        
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/energy_chip_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginEnd="@dimen/standard_margin"
-            android:hint="@string/focus"
-            app:errorEnabled="true"
-            app:boxStrokeColor="@color/colorPrimary"
+            android:layout_margin="@dimen/standard_margin"
+            app:singleSelection="true"
+            app:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/energy_entry_layout"
-            app:layout_constraintBottom_toTopOf="@id/motivation_entry_layout">
+            app:layout_constraintTop_toBottomOf="@id/energy_label"
+            app:layout_constraintBottom_toTopOf="@id/focus_chip_group"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/focus_entry"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:text="@={viewModel.focusLiveData}"/>
+        <TextView
+            android:id="@+id/focus_label"
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@string/focus"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/energy_chip_group"
+            app:layout_constraintBottom_toTopOf="@id/focus_chip_group"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/motivation_entry_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/focus_chip_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginEnd="@dimen/standard_margin"
-            android:hint="@string/motivation"
-            app:errorEnabled="true"
-            app:boxStrokeColor="@color/colorPrimary"
+            android:layout_margin="@dimen/standard_margin"
+            app:singleSelection="true"
+            app:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/focus_entry_layout"
-            app:layout_constraintBottom_toTopOf="@id/note_entry_layout">
+            app:layout_constraintTop_toBottomOf="@id/focus_label"
+            app:layout_constraintBottom_toTopOf="@id/motivation_label"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/motivation_entry"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:text="@={viewModel.motivationLiveData}"/>
+        <TextView
+            android:id="@+id/motivation_label"
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@string/motivation"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/focus_chip_group"
+            app:layout_constraintBottom_toTopOf="@id/motivation_chip_group"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/motivation_chip_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            app:singleSelection="true"
+            app:singleLine="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/motivation_label"
+            app:layout_constraintBottom_toTopOf="@id/note_entry_layout"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/note_entry_layout"
@@ -112,7 +111,7 @@
             app:boxStrokeColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/motivation_entry_layout"
+            app:layout_constraintTop_toBottomOf="@id/motivation_chip_group"
             app:layout_constraintBottom_toTopOf="@id/save">
 
             <com.google.android.material.textfield.TextInputEditText
