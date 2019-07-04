@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
+            app:checked="@={viewModel.energyLiveData}"
             app:singleSelection="true"
             app:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
