@@ -28,4 +28,9 @@
     <style name="TextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="Error">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/midwinter_fire</item>
+    </style>
 </resources>

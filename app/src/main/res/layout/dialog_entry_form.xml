@@ -67,7 +67,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/energy_label"
-            app:layout_constraintBottom_toTopOf="@id/focus_chip_group"/>
+            app:layout_constraintBottom_toTopOf="@id/energy_error"/>
+
+        <TextView
+            android:id="@+id/energy_error"
+            style="@style/Error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:text="@string/entry_form_number_error"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/energy_chip_group"
+            app:layout_constraintBottom_toTopOf="@id/focus_label"/>
 
         <TextView
             android:id="@+id/focus_label"
@@ -78,7 +92,7 @@
             android:text="@string/focus"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/energy_chip_group"
+            app:layout_constraintTop_toBottomOf="@id/energy_error"
             app:layout_constraintBottom_toTopOf="@id/focus_chip_group"/>
 
         <com.google.android.material.chip.ChipGroup
@@ -87,11 +101,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
+            app:checked="@={viewModel.focusLiveData}"
             app:singleSelection="true"
             app:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/focus_label"
+            app:layout_constraintBottom_toTopOf="@id/focus_error"/>
+
+        <TextView
+            android:id="@+id/focus_error"
+            style="@style/Error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:text="@string/entry_form_number_error"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/focus_chip_group"
             app:layout_constraintBottom_toTopOf="@id/motivation_label"/>
 
         <TextView
@@ -103,7 +132,7 @@
             android:text="@string/motivation"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/focus_chip_group"
+            app:layout_constraintTop_toBottomOf="@id/focus_error"
             app:layout_constraintBottom_toTopOf="@id/motivation_chip_group"/>
 
         <com.google.android.material.chip.ChipGroup
@@ -112,11 +141,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
+            app:checked="@={viewModel.motivationLiveData}"
             app:singleSelection="true"
             app:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/motivation_label"
+            app:layout_constraintBottom_toTopOf="@id/note_entry_layout"/>
+
+        <TextView
+            android:id="@+id/motivation_error"
+            style="@style/Error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:text="@string/entry_form_number_error"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/motivation_chip_group"
             app:layout_constraintBottom_toTopOf="@id/note_entry_layout"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +177,7 @@
             app:boxStrokeColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/motivation_chip_group"
+            app:layout_constraintTop_toBottomOf="@id/motivation_error"
             app:layout_constraintBottom_toTopOf="@id/save_button">
 
             <com.google.android.material.textfield.TextInputEditText

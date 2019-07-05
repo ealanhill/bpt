@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import co.thrivemobile.bpt.R
 import co.thrivemobile.bpt.base.BaseBottomDialogFragment
 import co.thrivemobile.bpt.databinding.DialogEntryFormBinding
+import co.thrivemobile.bpt.util.show
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
@@ -40,6 +41,9 @@ class EntryFormDialogFragment : BaseBottomDialogFragment() {
 
         entryFormViewModel.saveLivedata.observe(viewLifecycleOwner, Observer { close(it) })
         entryFormViewModel.cancelLiveEvent.observe(viewLifecycleOwner, Observer { close(it) })
+        entryFormViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error ->
+            error?.let { handleValidation(it) }
+        })
 
         setUpChips(binding.energyChipGroup)
         setUpChips(binding.focusChipGroup)
@@ -66,5 +70,11 @@ class EntryFormDialogFragment : BaseBottomDialogFragment() {
         }
     }
 
-    private fun getError(@StringRes stringId: Int?) = stringId?.let { getString(it) }
+    private fun handleValidation(event: EntryFormValidationEvent) {
+        binding.apply {
+            energyError.show(event.energyError)
+            focusError.show(event.focusError)
+            motivationError.show(event.motivationError)
+        }
+    }
 }

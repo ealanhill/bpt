@@ -2,26 +2,18 @@ package co.thrivemobile.bpt.util
 
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingMethod
-import androidx.databinding.InverseBindingMethods
+import androidx.databinding.InverseBindingListener
 import com.google.android.material.chip.ChipGroup
 
-@InverseBindingMethods(
-    InverseBindingMethod(
-       type = ChipGroup::class,
-       attribute = "checked",
-       method = "getCheckedChipId"
-   )
-)
-object ChipGroupBindingAdapter {
-
-    @InverseBindingAdapter(attribute = "checked")
-    fun getChecked(chipGroup: ChipGroup): Int {
-        return chipGroup.checkedChipId
+@BindingAdapter(value = ["checked", "checkedAttrChanged"], requireAll = false)
+fun setChecked(chipGroup: ChipGroup, id: Int, listener: InverseBindingListener) {
+    chipGroup.check(id)
+    chipGroup.setOnCheckedChangeListener { _, _ ->
+        listener.onChange()
     }
+}
 
-    @BindingAdapter("checked")
-    fun setChecked(chipGroup: ChipGroup, id: Int) {
-        chipGroup.check(id)
-    }
+@InverseBindingAdapter(attribute = "checked", event = "checkedAttrChanged")
+fun getChecked(chipGroup: ChipGroup): Int {
+    return chipGroup.checkedChipId
 }

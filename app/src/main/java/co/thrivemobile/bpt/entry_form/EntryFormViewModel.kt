@@ -3,7 +3,6 @@ package co.thrivemobile.bpt.entry_form
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import co.thrivemobile.bpt.R
 import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.bpt.util.SingleLiveEvent
 import co.thrivemobile.bpt.util.ioThread
@@ -22,9 +21,9 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
     }
 
     val timeLiveData = NonNullLiveData("0:00 AM")
-    val energyLiveData = MutableLiveData<String>()
-    val focusLiveData = MutableLiveData<String>()
-    val motivationLiveData = MutableLiveData<String>()
+    val energyLiveData = MutableLiveData<Int>()
+    val focusLiveData = MutableLiveData<Int>()
+    val motivationLiveData = MutableLiveData<Int>()
     val notesLiveData = MutableLiveData<String>()
 
     val errorLiveData = MediatorLiveData<EntryFormValidationEvent>().apply {
@@ -40,9 +39,9 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
 
         fun enableSubmit(): Boolean {
             return validationEvent.hasNoErrors &&
-                    (energyLiveData.value?.isNotBlank() ?: false) &&
-                    (focusLiveData.value?.isNotBlank() ?: false) &&
-                    (motivationLiveData.value?.isNotBlank() ?: false)
+                    (energyLiveData.value != null) &&
+                    (focusLiveData.value != null) &&
+                    (motivationLiveData.value != null)
         }
 
         addSource(energyLiveData) { this.value = enableSubmit() }
@@ -80,33 +79,18 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
         saveLivedata.value = true
     }
 
-    private fun validateEnergyValue(energy: String?) {
-        validationEvent.energyErrorRes =
-            if (energy == null || (energy.isNotBlank() && energy.toInt() in 1..10)) {
-                null
-            } else {
-                R.string.entry_form_number_error
-            }
+    private fun validateEnergyValue(energy: Int?) {
+        validationEvent.energyError = !(energy == null || energy in 1..10)
         errorLiveData.value = validationEvent
     }
 
-    private fun validateFocusValue(focus: String?) {
-        validationEvent.focusErrorRes =
-            if (focus == null || (focus.isNotBlank() && focus.toInt() in 1..10)) {
-                null
-            } else {
-                R.string.entry_form_number_error
-            }
+    private fun validateFocusValue(focus: Int?) {
+        validationEvent.focusError = !(focus == null || focus in 1..10)
         errorLiveData.value = validationEvent
     }
 
-    private fun validateMotivationValue(motivation: String?) {
-        validationEvent.motivationErrorRes =
-            if (motivation == null || (motivation.isNotBlank() && motivation.toInt() in 1..10)) {
-                null
-            } else {
-                R.string.entry_form_number_error
-            }
+    private fun validateMotivationValue(motivation: Int?) {
+        validationEvent.motivationError = !(motivation == null || motivation in 1..10)
         errorLiveData.value = validationEvent
     }
 }
