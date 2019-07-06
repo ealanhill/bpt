@@ -8,6 +8,6 @@ data class EntryFormValidationEvent(
 
     val hasNoErrors: Boolean
         get() {
-            return energyError && focusError && motivationError
+            return !(energyError || focusError || motivationError)
         }
 }

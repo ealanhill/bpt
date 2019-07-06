@@ -1,6 +1,5 @@
 package co.thrivemobile.bpt.entry_form
 
-import co.thrivemobile.bpt.R
 import co.thrivemobile.bpt.util.InstantExecutorExtension
 import co.thrivemobile.bpt.util.observeOnce
 import co.thrivemobile.repository.BptDao
@@ -25,8 +24,8 @@ import org.threeten.bp.ZoneOffset
 class EntryFormViewModelTest {
 
     @Mock lateinit var mockRepo: BptDao
-    var now = { LocalDateTime.of(2019, 5, 1, 13, 0) }
-    lateinit var viewModel: EntryFormViewModel
+    private var now = { LocalDateTime.of(2019, 5, 1, 13, 0) }
+    private lateinit var viewModel: EntryFormViewModel
 
     @BeforeEach
     fun beforeEach() {
@@ -62,11 +61,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a valid value for energy don't show error")
     fun validEnergyValue() {
-        viewModel.energyLiveData.value = "5"
+        viewModel.energyLiveData.value = 5
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.energyErrorRes)
+            assertFalse(it.energyError)
             assertTrue(it.hasNoErrors)
         }
 
@@ -78,11 +77,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters 0 for energy then show the error")
     fun invalidEnergyValueZero() {
-        viewModel.energyLiveData.value = "0"
+        viewModel.energyLiveData.value = 0
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.energyErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.energyError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -94,11 +93,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a value greater than 10 for energy then show the error")
     fun invalidEnergyValueTen() {
-        viewModel.energyLiveData.value = "15"
+        viewModel.energyLiveData.value = 15
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.energyErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.energyError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -108,13 +107,13 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a blank string for energy then show the error")
+    @DisplayName("When user enters a null value for energy then show the error")
     fun energyBlankString() {
-        viewModel.energyLiveData.value = ""
+        viewModel.energyLiveData.value = null
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.energyErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.energyError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -126,20 +125,20 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters an energy value at the edge of the value range don't show error")
     fun energyEdgeCase() {
-        viewModel.energyLiveData.value = "1"
+        viewModel.energyLiveData.value = 1
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.energyErrorRes)
+            assertFalse(it.energyError)
             assertTrue(it.hasNoErrors)
         }
         viewModel.enableSubmit.observeOnce {
             assertFalse(it)
         }
 
-        viewModel.energyLiveData.value = "10"
+        viewModel.energyLiveData.value = 10
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.energyErrorRes)
+            assertFalse(it.energyError)
             assertTrue(it.hasNoErrors)
         }
         viewModel.enableSubmit.observeOnce {
@@ -152,11 +151,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a valid value for focus don't show error")
     fun validFocusValue() {
-        viewModel.focusLiveData.value = "5"
+        viewModel.focusLiveData.value = 5
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.focusErrorRes)
+            assertFalse(it.focusError)
             assertTrue(it.hasNoErrors)
         }
 
@@ -168,11 +167,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters 0 for focus then show the error")
     fun invalidFocusValueZero() {
-        viewModel.focusLiveData.value = "0"
+        viewModel.focusLiveData.value = 0
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.focusErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.focusError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -184,11 +183,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a value greater than 10 for focus then show the error")
     fun invalidFocusValueTen() {
-        viewModel.focusLiveData.value = "15"
+        viewModel.focusLiveData.value = 15
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.focusErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.focusError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -198,13 +197,13 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a blank string for focus then show the error")
+    @DisplayName("When user enters a null value for focus then show the error")
     fun focusBlankString() {
-        viewModel.focusLiveData.value = ""
+        viewModel.focusLiveData.value = null
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.focusErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.focusError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -216,20 +215,20 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a focus value at the edge of the value range don't show error")
     fun focusEdgeCase() {
-        viewModel.focusLiveData.value = "1"
+        viewModel.focusLiveData.value = 1
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.focusErrorRes)
+            assertFalse(it.focusError)
             assertTrue(it.hasNoErrors)
         }
         viewModel.enableSubmit.observeOnce {
             assertFalse(it)
         }
 
-        viewModel.focusLiveData.value = "10"
+        viewModel.focusLiveData.value = 10
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.focusErrorRes)
+            assertFalse(it.focusError)
             assertTrue(it.hasNoErrors)
         }
         viewModel.enableSubmit.observeOnce {
@@ -242,11 +241,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a valid value for motivation don't show error")
     fun validMotivationValue() {
-        viewModel.motivationLiveData.value = "5"
+        viewModel.motivationLiveData.value = 5
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.motivationErrorRes)
+            assertFalse(it.motivationError)
             assertTrue(it.hasNoErrors)
         }
 
@@ -258,11 +257,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters 0 for motivation then show the error")
     fun invalidMotivationValueZero() {
-        viewModel.motivationLiveData.value = "0"
+        viewModel.motivationLiveData.value = 0
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.motivationErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.motivationError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -274,11 +273,11 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a value greater than 10 for motivation then show the error")
     fun invalidMotivationValueTen() {
-        viewModel.motivationLiveData.value = "15"
+        viewModel.motivationLiveData.value = 15
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.motivationErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.motivationError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -288,13 +287,13 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a blank string for motivation then show the error")
+    @DisplayName("When user enters a null value for motivation then show the error")
     fun motivationBlankString() {
-        viewModel.motivationLiveData.value = ""
+        viewModel.motivationLiveData.value = null
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertTrue(it.motivationErrorRes == R.string.entry_form_number_error)
+            assertTrue(it.motivationError)
             assertFalse(it.hasNoErrors)
         }
 
@@ -306,20 +305,20 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user enters a motivation value at the edge of the value range don't show error")
     fun motivationEdgeCase() {
-        viewModel.motivationLiveData.value = "1"
+        viewModel.motivationLiveData.value = 1
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.motivationErrorRes)
+            assertFalse(it.motivationError)
             assertTrue(it.hasNoErrors)
         }
         viewModel.enableSubmit.observeOnce {
             assertFalse(it)
         }
 
-        viewModel.motivationLiveData.value = "10"
+        viewModel.motivationLiveData.value = 10
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
-            assertNull(it.motivationErrorRes)
+            assertFalse(it.motivationError)
             assertTrue(it.hasNoErrors)
         }
         viewModel.enableSubmit.observeOnce {
@@ -330,7 +329,7 @@ class EntryFormViewModelTest {
     @Test
     @DisplayName("When user presses submit, ensure the entry is properly saved to the DB")
     fun saveData() {
-        val testValue = "5"
+        val testValue = 5
         val testNote = "a simple note"
 
         viewModel.apply {
@@ -345,12 +344,14 @@ class EntryFormViewModelTest {
         val testEntry = Entry(
             date = OffsetDateTime.of(2019, 5, 1, 13, 0, 0, 0, ZoneOffset.UTC),
             time = OffsetTime.of(13, 0, 0, 0, ZoneOffset.UTC),
-            energy = testValue.toInt(),
-            focus = testValue.toInt(),
-            motivation = testValue.toInt(),
+            energy = testValue,
+            focus = testValue,
+            motivation = testValue,
             notes = testNote
         )
 
         verify(mockRepo).insertEntry(testEntry)
+
+        assertTrue(viewModel.saveLivedata.value!!)
     }
 }
