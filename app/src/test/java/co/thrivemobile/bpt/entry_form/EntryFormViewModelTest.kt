@@ -108,8 +108,24 @@ class EntryFormViewModelTest {
 
     @Test
     @DisplayName("When user enters a null value for energy then show the error")
-    fun energyBlankString() {
+    fun energyNullValue() {
         viewModel.energyLiveData.value = null
+
+        viewModel.errorLiveData.observeOnce {
+            assertNotNull(it)
+            assertTrue(it.energyError)
+            assertFalse(it.hasNoErrors)
+        }
+
+        viewModel.enableSubmit.observeOnce {
+            assertFalse(it)
+        }
+    }
+
+    @Test
+    @DisplayName("When a user enters a negative value for energy then show error")
+    fun energyNegativeValue() {
+        viewModel.energyLiveData.value = -1
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)
@@ -213,6 +229,22 @@ class EntryFormViewModelTest {
     }
 
     @Test
+    @DisplayName("When a user enters a negative value for focus then show error")
+    fun focusNegativeValue() {
+        viewModel.focusLiveData.value = -1
+
+        viewModel.errorLiveData.observeOnce {
+            assertNotNull(it)
+            assertTrue(it.focusError)
+            assertFalse(it.hasNoErrors)
+        }
+
+        viewModel.enableSubmit.observeOnce {
+            assertFalse(it)
+        }
+    }
+
+    @Test
     @DisplayName("When user enters a focus value at the edge of the value range don't show error")
     fun focusEdgeCase() {
         viewModel.focusLiveData.value = 1
@@ -290,6 +322,22 @@ class EntryFormViewModelTest {
     @DisplayName("When user enters a null value for motivation then show the error")
     fun motivationBlankString() {
         viewModel.motivationLiveData.value = null
+
+        viewModel.errorLiveData.observeOnce {
+            assertNotNull(it)
+            assertTrue(it.motivationError)
+            assertFalse(it.hasNoErrors)
+        }
+
+        viewModel.enableSubmit.observeOnce {
+            assertFalse(it)
+        }
+    }
+
+    @Test
+    @DisplayName("When a user enters a negative value for motivation then show error")
+    fun motivationNegativeValue() {
+        viewModel.motivationLiveData.value = -1
 
         viewModel.errorLiveData.observeOnce {
             assertNotNull(it)

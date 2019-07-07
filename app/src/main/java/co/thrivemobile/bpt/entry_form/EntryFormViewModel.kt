@@ -1,6 +1,5 @@
 package co.thrivemobile.bpt.entry_form
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,17 +38,13 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
         value = false
 
         fun enableSubmit(): Boolean {
-            val enable = validationEvent.hasNoErrors &&
-                    (energyLiveData.value != null) &&
-                    (focusLiveData.value != null) &&
-                    (motivationLiveData.value != null)
-            Log.v("EntryFormViewModel", "enable submit: $enable")
-            return enable
+            return validationEvent.hasNoErrors &&
+                    !(energyLiveData.value == null || energyLiveData.value == -1) &&
+                    !(focusLiveData.value == null || focusLiveData.value == -1) &&
+                    !(motivationLiveData.value == null || motivationLiveData.value == -1)
         }
 
-        addSource(energyLiveData) { this.value = enableSubmit() }
-        addSource(focusLiveData) { this.value = enableSubmit() }
-        addSource(motivationLiveData) { this.value = enableSubmit() }
+        addSource(errorLiveData) { this.value = enableSubmit() }
     }
 
     val cancelLiveEvent = SingleLiveEvent<Boolean>()

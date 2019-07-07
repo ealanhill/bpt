@@ -198,6 +198,7 @@
             android:paddingEnd="36dp"
             android:text="@string/save"
             android:textSize="24sp"
+            android:backgroundTint="@drawable/selectable_orange"
             android:enabled="@{viewModel.enableSubmit}"
             android:onClick="@{ () -> viewModel.onSaveSelected() }"
             app:cornerRadius="10dp"
