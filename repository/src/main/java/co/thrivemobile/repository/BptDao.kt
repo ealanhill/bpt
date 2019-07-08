@@ -17,7 +17,7 @@ interface BptDao {
     fun getAllDays(): List<Day>
 
     @Query("SELECT * FROM ENTRIES WHERE date = :date ORDER BY id")
-    fun getDaysEntries(date: OffsetDateTime): LiveData<List<Entry>>
+    fun getEntriesForDay(date: OffsetDateTime): LiveData<List<Entry>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEntry(entry: Entry)

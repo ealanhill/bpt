@@ -2,6 +2,7 @@ package co.thrivemobile.bpt.statistics
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import co.thrivemobile.bpt.R
@@ -18,6 +19,7 @@ import co.thrivemobile.bpt.statistics.vh.SparkViewHolder
 import co.thrivemobile.bpt.statistics.vh.StatisticsViewHolder
 
 class StatisticsAdapter(
+    private val lifecycleOwner: LifecycleOwner,
     private val launchEntryForm: () -> Unit
 ) : ListAdapter<StatisticsItem, StatisticsViewHolder<StatisticsItem>>(DIFF_CALLBACK) {
 
@@ -79,7 +81,7 @@ class StatisticsAdapter(
         parent: ViewGroup
     ): SparkViewHolder {
         val binding = ItemSparkBinding.inflate(inflater, parent, false)
-        return SparkViewHolder(binding)
+        return SparkViewHolder(binding, lifecycleOwner)
     }
 
     private fun createEntryViewHolder(

@@ -15,13 +15,15 @@ class StatisticsFragment : Fragment() {
 
     private lateinit var binding: FragmentStatisticsBinding
     private val statisticsViewModel: StatisticsViewModel by inject()
-    private val statisticsAdapter = StatisticsAdapter { launchEntryForm() }
+    private lateinit var statisticsAdapter: StatisticsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        statisticsAdapter = StatisticsAdapter(viewLifecycleOwner) { launchEntryForm() }
+
         binding = FragmentStatisticsBinding.inflate(inflater, container, false).apply {
             viewModel = statisticsViewModel
             lifecycleOwner = viewLifecycleOwner

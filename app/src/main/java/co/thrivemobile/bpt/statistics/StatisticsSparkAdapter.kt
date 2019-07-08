@@ -1,11 +1,10 @@
 package co.thrivemobile.bpt.statistics
 
-import co.thrivemobile.repository.Entry
 import com.robinhood.spark.SparkAdapter
 
 class StatisticsSparkAdapter : SparkAdapter() {
 
-    var dayEntries: MutableList<Entry> = mutableListOf()
+    var averages: MutableList<Float> = mutableListOf()
         set(value) {
             field.apply {
                 clear()
@@ -14,16 +13,11 @@ class StatisticsSparkAdapter : SparkAdapter() {
             notifyDataSetChanged()
         }
 
-    override fun getY(index: Int): Float = dayEntries[index].energy.toFloat()
+    override fun getY(index: Int): Float = averages[index]
 
-    override fun getX(index: Int): Float {
-        return dayEntries[index].id.toFloat()
-    }
-
-    override fun getItem(index: Int): Any = dayEntries[index]
+    override fun getItem(index: Int): Any = averages[index]
 
     override fun getCount(): Int {
-        return dayEntries.size
+        return averages.size
     }
-
 }
