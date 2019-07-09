@@ -4,16 +4,23 @@ import androidx.room.TypeConverter
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.OffsetTime
 import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeFormatterBuilder
+import org.threeten.bp.temporal.ChronoField
+import org.threeten.bp.temporal.TemporalField
 
 object BptTypeConverters {
-    private val dateFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+
+    private val dateFormatter = DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_OFFSET_DATE)
+        .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+        .toFormatter()
     private val timeFormatter = DateTimeFormatter.ISO_OFFSET_TIME
 
     @TypeConverter
     @JvmStatic
     fun toOffsetDateTime(value: String?): OffsetDateTime? {
         return value?.let {
-            dateFormatter.parse(value, OffsetDateTime::from)
+            OffsetDateTime.parse(it, dateFormatter)
         }
     }
 

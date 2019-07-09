@@ -16,8 +16,8 @@ class BptTypeConvertersTest {
     @DisplayName("Given a valid offset date")
     inner class ValidOffsetDate {
 
-        private val exptectedConvertedString = "2019-05-21T00:00:00+02:00"
-        private val expectedOffsetDate = OffsetDateTime.of(2019,5,21, 0,0,0,0, ZoneOffset.of("+02:00"))
+        private val expectedConvertedString = "2019-05-21+02:00"
+        private val expectedOffsetDate = OffsetDateTime.of(2019,5,21,0,0,0,0, ZoneOffset.of("+02:00"))
 
         @Test
         @DisplayName("When inserting into database it is converted to correct string")
@@ -25,13 +25,13 @@ class BptTypeConvertersTest {
             val convertedString = BptTypeConverters.fromOffsetDateTime(expectedOffsetDate)
 
             assertNotNull(convertedString)
-            assertTrue(convertedString == exptectedConvertedString)
+            assertTrue(convertedString == expectedConvertedString)
         }
 
         @Test
         @DisplayName("When retrieving from the database it is converted to correct OffSetDate")
         fun testStringToDateConversion() {
-            val convertedOffsetDate = BptTypeConverters.toOffsetDateTime(exptectedConvertedString)
+            val convertedOffsetDate = BptTypeConverters.toOffsetDateTime(expectedConvertedString)
 
             assertNotNull(convertedOffsetDate)
             assertTrue(convertedOffsetDate == expectedOffsetDate)

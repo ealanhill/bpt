@@ -24,6 +24,6 @@ val appModule = module {
     factory<() -> LocalDateTime>(nowLocalDateTimeQualifier) { { LocalDateTime.now() } }
 
     viewModel { StatisticsViewModel(get()) }
-    viewModel { EntryFormViewModel(get(), get(nowLocalDateTimeQualifier)) }
+    viewModel { EntryFormViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { SparkViewModel(get(), get(nowOffsetDateTime)) }
 }

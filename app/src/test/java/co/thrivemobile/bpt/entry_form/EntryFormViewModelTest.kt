@@ -24,7 +24,8 @@ import org.threeten.bp.ZoneOffset
 class EntryFormViewModelTest {
 
     @Mock lateinit var mockRepo: BptDao
-    private var now = { LocalDateTime.of(2019, 5, 1, 13, 0) }
+    private val dateTime = LocalDateTime.of(2019, 5, 1, 13, 0)
+    private var now = { OffsetDateTime.of(dateTime, ZoneOffset.UTC) }
     private lateinit var viewModel: EntryFormViewModel
 
     @BeforeEach

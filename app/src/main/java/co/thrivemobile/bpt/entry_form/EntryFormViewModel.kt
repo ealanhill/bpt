@@ -8,13 +8,10 @@ import co.thrivemobile.bpt.util.SingleLiveEvent
 import co.thrivemobile.bpt.util.ioThread
 import co.thrivemobile.repository.BptDao
 import co.thrivemobile.repository.Entry
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
-import org.threeten.bp.OffsetTime
-import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 
-class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : ViewModel() {
+class EntryFormViewModel(private val repo: BptDao, now: () -> OffsetDateTime) : ViewModel() {
 
     companion object {
         private val formatter = DateTimeFormatter.ofPattern("h:mm a")
@@ -52,7 +49,7 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
 
     private val validationEvent = EntryFormValidationEvent()
     private val nowString = now().format(formatter)
-    private val nowLocalDateTime = now()
+    private val nowOffsetDateTime = now()
 
     init {
         timeLiveData.value = nowString
@@ -64,8 +61,8 @@ class EntryFormViewModel(private val repo: BptDao, now: () -> LocalDateTime) : V
 
     fun onSaveSelected() {
         val newEntry = Entry(
-            date = OffsetDateTime.of(nowLocalDateTime, ZoneOffset.UTC),
-            time = OffsetTime.of(nowLocalDateTime.toLocalTime(), ZoneOffset.UTC),
+            date = nowOffsetDateTime,
+            time = nowOffsetDateTime.toOffsetTime(),
             energy = energyLiveData.value?.toInt() ?: 0,
             focus = focusLiveData.value?.toInt() ?: 0,
             motivation = motivationLiveData.value?.toInt() ?: 0,
