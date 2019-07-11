@@ -12,7 +12,6 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneId
 
-private val nowLocalDateTimeQualifier = named("nowLocalDateTime")
 private val nowOffsetDateTime = named("nowOffsetDateTime")
 
 val appModule = module {
@@ -21,9 +20,8 @@ val appModule = module {
     single { BptDatabase.getInstance(androidContext()).bptDao() }
 
     factory<() -> OffsetDateTime>(nowOffsetDateTime) { { OffsetDateTime.now(ZoneId.systemDefault()) } }
-    factory<() -> LocalDateTime>(nowLocalDateTimeQualifier) { { LocalDateTime.now() } }
 
-    viewModel { StatisticsViewModel(get()) }
+    viewModel { StatisticsViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { EntryFormViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { SparkViewModel(get(), get(nowOffsetDateTime)) }
 }

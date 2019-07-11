@@ -34,7 +34,7 @@ class StatisticsFragment : Fragment() {
             }
         }
 
-        statisticsViewModel.statisticsItemsData.observe(
+        statisticsViewModel.statisticsItemsLiveData.observe(
             viewLifecycleOwner,
             Observer { statisticsAdapter.submitList(it) }
         )
