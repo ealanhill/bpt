@@ -12,9 +12,19 @@ import co.thrivemobile.repository.Entry
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-class StatisticsViewModel(val repo: BptDao, val now: () -> OffsetDateTime) : ViewModel() {
+class StatisticsViewModel(
+    private val repo: BptDao,
+    private val now: () -> OffsetDateTime
+) : ViewModel() {
 
-    private val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
+    companion object {
+        private val STARTING_LIST = listOf(
+            SparkItem(),
+            EntryItem()
+        )
+    }
+
+    private val timeFormatter = DateTimeFormatter.ofPattern("h:mm a")
 
     private val entriesLive: LiveData<List<Entry>>
         get() {
@@ -22,17 +32,12 @@ class StatisticsViewModel(val repo: BptDao, val now: () -> OffsetDateTime) : Vie
             return repo.getEntriesForDay(currentDay)
         }
     val statisticsItemsLiveData = MediatorLiveData<List<StatisticsItem>>().apply {
-        this.value = listOf(
-            SparkItem(),
-            EntryItem()
-        )
+        this.value = STARTING_LIST
 
         addSource(entriesLive) { entries ->
-            val items = this.value?.toMutableList() ?: mutableListOf()
+            val items = STARTING_LIST.toMutableList()
             val hourItems = entries.map { mapEntryToHourItem(it) }
-            val intersection = hourItems.intersect(items)
-            val hourItemsToAdd = hourItems.minus(intersection)
-            items.addAll(hourItemsToAdd)
+            items.addAll(hourItems)
             this.value = items
         }
     }
