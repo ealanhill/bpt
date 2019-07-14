@@ -13,4 +13,5 @@
     <string name="notes">Notes</string>
 
     <string name="entry_form_number_error">Please enter a number from 1 to 10</string>
+    <string name="statistics_no_entries">No entries for today!</string>
 </resources>

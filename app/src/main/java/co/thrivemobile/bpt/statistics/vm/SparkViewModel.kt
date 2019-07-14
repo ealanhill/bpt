@@ -4,14 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.statistics.SparkPoint
+import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.repository.BptDao
 import co.thrivemobile.repository.Entry
 import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 class SparkViewModel(
     private val repo: BptDao,
     private val now: () -> OffsetDateTime
 ) : ViewModel() {
+
+    private val formatter = DateTimeFormatter.ofPattern("LLL d, uuuu")
 
     private val entriesLive: LiveData<List<Entry>>
         get() {
@@ -19,6 +23,7 @@ class SparkViewModel(
             return repo.getEntriesForDay(currentDay)
         }
 
+    val dateLiveData = NonNullLiveData(formatter.format(now()))
     val entriesMediated = MediatorLiveData<List<SparkPoint>>().apply {
         this.value = mutableListOf()
 

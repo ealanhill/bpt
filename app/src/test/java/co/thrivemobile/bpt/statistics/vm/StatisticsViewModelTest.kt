@@ -1,6 +1,7 @@
 package co.thrivemobile.bpt.statistics.vm
 
 import co.thrivemobile.bpt.statistics.StatisticsViewModel
+import co.thrivemobile.bpt.statistics.items.EmptyHourItem
 import co.thrivemobile.bpt.statistics.items.EntryItem
 import co.thrivemobile.bpt.statistics.items.HourItem
 import co.thrivemobile.bpt.statistics.items.SparkItem
@@ -27,7 +28,8 @@ class StatisticsViewModelTest {
     companion object {
         private val DEFAULT_LIST = listOf(
             SparkItem(),
-            EntryItem()
+            EntryItem(),
+            EmptyHourItem()
         )
 
         private val ENTRIES = listOf(

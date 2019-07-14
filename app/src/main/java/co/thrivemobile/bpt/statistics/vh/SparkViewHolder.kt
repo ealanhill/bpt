@@ -16,14 +16,15 @@ class SparkViewHolder(
 
     private var sparkAdapter = StatisticsSparkAdapter()
 
-    val viewModel: SparkViewModel by inject()
+    val sparkViewModel: SparkViewModel by inject()
 
     override fun bind(item: SparkItem) {
-        viewModel.entriesMediated.observe(lifecycleOwner, Observer { entries ->
+        sparkViewModel.entriesMediated.observe(lifecycleOwner, Observer { entries ->
             sparkAdapter.averages = entries.toMutableList()
         })
 
         binding.apply {
+            viewModel = sparkViewModel
             sparkView.adapter = sparkAdapter
         }
     }

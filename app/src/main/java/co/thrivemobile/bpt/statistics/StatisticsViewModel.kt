@@ -3,6 +3,7 @@ package co.thrivemobile.bpt.statistics
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import co.thrivemobile.bpt.statistics.items.EmptyHourItem
 import co.thrivemobile.bpt.statistics.items.EntryItem
 import co.thrivemobile.bpt.statistics.items.HourItem
 import co.thrivemobile.bpt.statistics.items.SparkItem
@@ -37,7 +38,11 @@ class StatisticsViewModel(
         addSource(entriesLive) { entries ->
             val items = STARTING_LIST.toMutableList()
             val hourItems = entries.map { mapEntryToHourItem(it) }
-            items.addAll(hourItems)
+            if (hourItems.isEmpty()) {
+                items.add(EmptyHourItem())
+            } else {
+                items.addAll(hourItems)
+            }
             this.value = items
         }
     }

@@ -132,4 +132,12 @@ class SparkViewModelTest {
             assertTrue(it == points)
         }
     }
+
+    @Test
+    @DisplayName("Ensure date is properly formatted")
+    fun formatDate() {
+        viewModel = SparkViewModel(mockRepo, now)
+
+        assertTrue(viewModel.dateLiveData.value == "May 1, 2019")
+    }
 }

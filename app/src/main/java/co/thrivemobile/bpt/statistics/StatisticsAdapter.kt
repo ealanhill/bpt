@@ -6,13 +6,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import co.thrivemobile.bpt.R
+import co.thrivemobile.bpt.databinding.ItemEmptyHourBinding
 import co.thrivemobile.bpt.databinding.ItemEntryBinding
 import co.thrivemobile.bpt.databinding.ItemHourBinding
 import co.thrivemobile.bpt.databinding.ItemSparkBinding
+import co.thrivemobile.bpt.statistics.items.EmptyHourItem
 import co.thrivemobile.bpt.statistics.items.EntryItem
 import co.thrivemobile.bpt.statistics.items.HourItem
 import co.thrivemobile.bpt.statistics.items.SparkItem
 import co.thrivemobile.bpt.statistics.items.StatisticsItem
+import co.thrivemobile.bpt.statistics.vh.EmptyHourViewHolder
 import co.thrivemobile.bpt.statistics.vh.EntryViewHolder
 import co.thrivemobile.bpt.statistics.vh.HourViewHolder
 import co.thrivemobile.bpt.statistics.vh.SparkViewHolder
@@ -28,7 +31,8 @@ class StatisticsAdapter(
             override fun areItemsTheSame(oldItem: StatisticsItem, newItem: StatisticsItem): Boolean {
                 return (oldItem is SparkItem && newItem is SparkItem) ||
                         (oldItem is EntryItem && newItem is EntryItem) ||
-                        (oldItem is HourItem && newItem is HourItem)
+                        (oldItem is HourItem && newItem is HourItem) ||
+                        (oldItem is EmptyHourItem && newItem is EmptyHourItem)
             }
 
             @Suppress("USELESS_CAST")
@@ -42,6 +46,9 @@ class StatisticsAdapter(
                     }
                     oldItem is HourItem && newItem is HourItem -> {
                         (oldItem as HourItem) == (newItem as HourItem)
+                    }
+                    oldItem is EmptyHourItem && newItem is EmptyHourItem -> {
+                        (oldItem as EmptyHourItem) == (newItem as EmptyHourItem)
                     }
                     else -> false
                 }
@@ -59,6 +66,7 @@ class StatisticsAdapter(
             R.layout.item_spark -> createSparkViewHolder(inflater, parent)
             R.layout.item_entry -> createEntryViewHolder(inflater, parent)
             R.layout.item_hour -> createHourViewHolder(inflater, parent)
+            R.layout.item_empty_hour -> createEmptyHourViewHolder(inflater, parent)
             else -> throw IllegalArgumentException("Unknown view type: $viewType")
         } as StatisticsViewHolder<StatisticsItem>
     }
@@ -68,6 +76,7 @@ class StatisticsAdapter(
             is SparkItem -> R.layout.item_spark
             is EntryItem -> R.layout.item_entry
             is HourItem -> R.layout.item_hour
+            is EmptyHourItem -> R.layout.item_empty_hour
             else -> throw IllegalArgumentException("Unknown item at position #$position")
         }
     }
@@ -98,5 +107,13 @@ class StatisticsAdapter(
     ): HourViewHolder {
         val binding = ItemHourBinding.inflate(inflater, parent, false)
         return HourViewHolder(binding)
+    }
+
+    private fun createEmptyHourViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup
+    ): EmptyHourViewHolder {
+        val binding = ItemEmptyHourBinding.inflate(inflater, parent, false)
+        return EmptyHourViewHolder(binding)
     }
 }
