@@ -12,13 +12,24 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">@dimen/double_standard_text_size</item>
     </style>
 
     <style name="Title">
         <item name="android:textColor">@color/grey</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="ArticleTitle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/standard_text_size</item>
+    </style>
+
+    <style name="ArticleDescription">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
     <style name="CTA">
