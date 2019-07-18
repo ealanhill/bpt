@@ -28,7 +28,10 @@ class StatisticsAdapter(
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StatisticsItem>() {
-            override fun areItemsTheSame(oldItem: StatisticsItem, newItem: StatisticsItem): Boolean {
+            override fun areItemsTheSame(
+                oldItem: StatisticsItem,
+                newItem: StatisticsItem
+            ): Boolean {
                 return (oldItem is SparkItem && newItem is SparkItem) ||
                         (oldItem is EntryItem && newItem is EntryItem) ||
                         (oldItem is HourItem && newItem is HourItem) ||
@@ -36,7 +39,10 @@ class StatisticsAdapter(
             }
 
             @Suppress("USELESS_CAST")
-            override fun areContentsTheSame(oldItem: StatisticsItem, newItem: StatisticsItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: StatisticsItem,
+                newItem: StatisticsItem
+            ): Boolean {
                 return when {
                     oldItem is SparkItem && newItem is SparkItem -> {
                         (oldItem as SparkItem) == (newItem as SparkItem)
