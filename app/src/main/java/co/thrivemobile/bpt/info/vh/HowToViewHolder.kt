@@ -8,6 +8,6 @@ class HowToViewHolder(
     private val binding: ItemHowToBinding
 ) : RecyclerView.ViewHolder(binding.root), InfoViewHolder<HowToItem> {
     override fun bind(item: HowToItem) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

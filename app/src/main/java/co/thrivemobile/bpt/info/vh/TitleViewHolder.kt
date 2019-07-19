@@ -8,6 +8,6 @@ class TitleViewHolder(
     private val binding: ItemTitleBinding
 ) : RecyclerView.ViewHolder(binding.root), InfoViewHolder<TitleItem> {
     override fun bind(item: TitleItem) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

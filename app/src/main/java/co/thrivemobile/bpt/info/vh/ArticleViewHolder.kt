@@ -8,6 +8,6 @@ class ArticleViewHolder(
     private val binding: ItemArticleBinding
 ) : RecyclerView.ViewHolder(binding.root), InfoViewHolder<ArticleItem> {
     override fun bind(item: ArticleItem) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

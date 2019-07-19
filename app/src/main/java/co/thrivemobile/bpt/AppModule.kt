@@ -1,6 +1,7 @@
 package co.thrivemobile.bpt
 
 import co.thrivemobile.bpt.entry_form.EntryFormViewModel
+import co.thrivemobile.bpt.info.InfoViewModel
 import co.thrivemobile.bpt.statistics.StatisticsViewModel
 import co.thrivemobile.bpt.statistics.vm.SparkViewModel
 import co.thrivemobile.repository.BptDatabase
@@ -24,4 +25,5 @@ val appModule = module {
     viewModel { StatisticsViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { EntryFormViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { SparkViewModel(get(), get(nowOffsetDateTime)) }
+    viewModel { InfoViewModel() }
 }
