@@ -6,8 +6,9 @@ import co.thrivemobile.bpt.info.items.HowToItem
 import co.thrivemobile.bpt.info.items.TitleItem
 import co.thrivemobile.bpt.info.items.WhatIsItem
 import co.thrivemobile.bpt.util.NonNullLiveData
+import co.thrivemobile.networking.Network
 
-class InfoViewModel : ViewModel() {
+class InfoViewModel(private val network: Network) : ViewModel() {
 
     val infoItemsData = NonNullLiveData(
         listOf(

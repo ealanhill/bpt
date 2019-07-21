@@ -30,6 +30,7 @@ dependencies {
 
     implementation project(":uicomponents")
     implementation project(":repository")
+    implementation project(":networking")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Versions.kotlin"
     implementation "androidx.appcompat:appcompat:$Versions.appComponent"

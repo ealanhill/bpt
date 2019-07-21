@@ -1,6 +1,6 @@
 
 object Versions {
-    val kotlin = "1.3.31"
+    val kotlin = "1.3.41"
     val ktxCore = "1.0.2"
     val room = "2.1.0"
     val threetenabp = "1.2.0"
@@ -13,4 +13,5 @@ object Versions {
     val mockitoCore = "1.10.19"
     val mockitoExtension = "2.28.2"
     val debugDatabase = "1.0.6"
+    val okHttp = "4.0.1"
 }

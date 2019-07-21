@@ -4,6 +4,7 @@ import co.thrivemobile.bpt.entry_form.EntryFormViewModel
 import co.thrivemobile.bpt.info.InfoViewModel
 import co.thrivemobile.bpt.statistics.StatisticsViewModel
 import co.thrivemobile.bpt.statistics.vm.SparkViewModel
+import co.thrivemobile.networking.Network
 import co.thrivemobile.repository.BptDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -19,11 +20,12 @@ val appModule = module {
 
     single { BptDatabase.getInstance(androidContext()) }
     single { BptDatabase.getInstance(androidContext()).bptDao() }
+    single { Network.INSTANCE }
 
     factory<() -> OffsetDateTime>(nowOffsetDateTime) { { OffsetDateTime.now(ZoneId.systemDefault()) } }
 
     viewModel { StatisticsViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { EntryFormViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { SparkViewModel(get(), get(nowOffsetDateTime)) }
-    viewModel { InfoViewModel() }
+    viewModel { InfoViewModel(get()) }
 }

@@ -28,12 +28,20 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$Versions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$Versions.okHttp"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    compile "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:$Versions.ktxCore"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Versions.kotlin"
 }
 repositories {
     mavenCentral()
