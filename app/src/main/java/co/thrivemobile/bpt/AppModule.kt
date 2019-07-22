@@ -10,7 +10,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneId
 
@@ -20,7 +19,7 @@ val appModule = module {
 
     single { BptDatabase.getInstance(androidContext()) }
     single { BptDatabase.getInstance(androidContext()).bptDao() }
-    single { Network.INSTANCE }
+    single { Network() }
 
     factory<() -> OffsetDateTime>(nowOffsetDateTime) { { OffsetDateTime.now(ZoneId.systemDefault()) } }
 

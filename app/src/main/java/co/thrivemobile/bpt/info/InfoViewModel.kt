@@ -1,5 +1,6 @@
 package co.thrivemobile.bpt.info
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.info.items.ArticleItem
 import co.thrivemobile.bpt.info.items.HowToItem
@@ -22,4 +23,10 @@ class InfoViewModel(private val network: Network) : ViewModel() {
             ArticleItem("https://endpoints.elysiumhealth.com/the-complete-guide-to-the-science-of-circadian-rhythms-7b78581cbffa")
         )
     )
+
+    init {
+        network.getMetaData("https://alifeofproductivity.com/calculate-biological-prime-time/") {
+            Log.v("InfoViewModel", "Got data from url! $it")
+        }
+    }
 }

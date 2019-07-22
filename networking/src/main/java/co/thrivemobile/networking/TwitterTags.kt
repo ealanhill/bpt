@@ -1,7 +1,9 @@
 package co.thrivemobile.networking
 
+import java.util.regex.Pattern
+
 internal object TwitterTags {
-    const val TITLE = "twitter:title"
-    const val DESCRIPTION = "twitter:description"
-    const val IMAGE_URL = "twitter:image"
+    val TITLE: Pattern = Pattern.compile("<meta name=\"twitter:title\" content=\"([^\"]*)\"")
+    val DESCRIPTION: Pattern = Pattern.compile("<meta name=\"twitter:description\" content=\"([^\"]*)\"")
+    val IMAGE_URL: Pattern = Pattern.compile("<meta name=\"twitter:image\" content=\"(\\S+)\"")
 }
