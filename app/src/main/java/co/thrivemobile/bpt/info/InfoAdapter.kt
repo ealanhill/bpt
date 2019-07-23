@@ -23,7 +23,7 @@ import co.thrivemobile.bpt.info.vh.TitleViewHolder
 import co.thrivemobile.bpt.info.vh.WhatIsViewHolder
 
 class InfoAdapter(
-    private val lifecycleOwner: LifecycleOwner
+    private val viewLifecycleOwner: LifecycleOwner
 ) : ListAdapter<InfoItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -84,7 +84,9 @@ class InfoAdapter(
         inflater: LayoutInflater,
         parent: ViewGroup
     ): WhatIsViewHolder {
-        val binding = ItemWhatIsBinding.inflate(inflater, parent, false)
+        val binding = ItemWhatIsBinding.inflate(inflater, parent, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
         return WhatIsViewHolder(binding)
     }
 
@@ -92,7 +94,9 @@ class InfoAdapter(
         inflater: LayoutInflater,
         parent: ViewGroup
     ): HowToViewHolder {
-        val binding = ItemHowToBinding.inflate(inflater, parent, false)
+        val binding = ItemHowToBinding.inflate(inflater, parent, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
         return HowToViewHolder(binding)
     }
 
@@ -100,7 +104,9 @@ class InfoAdapter(
         inflater: LayoutInflater,
         parent: ViewGroup
     ): TitleViewHolder {
-        val binding = ItemTitleBinding.inflate(inflater, parent, false)
+        val binding = ItemTitleBinding.inflate(inflater, parent, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
         return TitleViewHolder(binding)
     }
 
@@ -108,7 +114,9 @@ class InfoAdapter(
         inflater: LayoutInflater,
         parent: ViewGroup
     ): ArticleViewHolder {
-        val binding = ItemArticleBinding.inflate(inflater, parent, false)
+        val binding = ItemArticleBinding.inflate(inflater, parent, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
         return ArticleViewHolder(binding)
     }
 }

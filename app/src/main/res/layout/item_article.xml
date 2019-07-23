@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="co.thrivemobile.bpt.info.vm.ArticleViewModel" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,6 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/half_margin"
+                android:text="@{viewModel.titleLiveData}"
                 tools:text="A really long title to ensure we wrap appropriately"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/article_image"
@@ -30,8 +38,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/half_margin"
-                android:visibility="gone"
+                android:text="@{viewModel.descriptionLiveData}"
                 tools:text="@string/lorem_ipsum_short"
+                tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@id/article_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +49,11 @@
             <ImageView
                 android:id="@+id/article_image"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:importantForAccessibility="no"
-                app:layout_constraintWidth_percent=".3"
+                android:scaleType="fitXY"
+                app:imageUrl="@{viewModel.imageUrlLiveData}"
+                app:layout_constraintWidth_percent=".35"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

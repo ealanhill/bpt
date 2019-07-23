@@ -39,11 +39,13 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:$Versions.room"
     kapt "androidx.room:room-compiler:$Versions.room"
-
     debugImplementation "com.amitshekhar.android:debug-db:$Versions.debugDatabase"
 
     // Time
     implementation "com.jakewharton.threetenabp:threetenabp:$Versions.threetenabp"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$Versions.picasso"
 
     implementation "com.google.android.material:material:$Versions.materialComponents"
     implementation "androidx.constraintlayout:constraintlayout:$Versions.constraintLayout"

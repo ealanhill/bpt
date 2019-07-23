@@ -14,4 +14,5 @@ object Versions {
     val mockitoExtension = "2.28.2"
     val debugDatabase = "1.0.6"
     val okHttp = "4.0.1"
+    val picasso = "2.71828"
 }

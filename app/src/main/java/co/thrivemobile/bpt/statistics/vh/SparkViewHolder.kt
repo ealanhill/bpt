@@ -16,7 +16,7 @@ class SparkViewHolder(
 
     private var sparkAdapter = StatisticsSparkAdapter()
 
-    val sparkViewModel: SparkViewModel by inject()
+    private val sparkViewModel: SparkViewModel by inject()
 
     override fun bind(item: SparkItem) {
         sparkViewModel.entriesMediated.observe(lifecycleOwner, Observer { entries ->

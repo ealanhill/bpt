@@ -1,6 +1,5 @@
 package co.thrivemobile.networking
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -10,7 +9,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 class Network {
 
@@ -28,7 +26,6 @@ class Network {
     fun getMetaData(url: String, updateResults: (MetaData) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             val result = requestUrl(url)
-            Log.v("Network", "Got: $result")
             updateResults(extractMetaData(result))
         }
     }
