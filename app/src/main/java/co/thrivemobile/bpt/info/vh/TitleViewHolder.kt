@@ -8,6 +8,8 @@ class TitleViewHolder(
     private val binding: ItemTitleBinding
 ) : RecyclerView.ViewHolder(binding.root), InfoViewHolder<TitleItem> {
     override fun bind(item: TitleItem) {
-
+        item.titleRes?.let {
+            binding.title.setText(it)
+        }
     }
 }

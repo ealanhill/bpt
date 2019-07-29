@@ -36,6 +36,7 @@
                 android:id="@+id/explanation_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/half_margin"
                 android:text="@string/lorem_ipsum"/>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

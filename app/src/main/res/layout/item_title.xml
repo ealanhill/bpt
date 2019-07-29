@@ -8,8 +8,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/standard_margin"
         android:paddingEnd="@dimen/standard_margin"
-        android:paddingTop="@dimen/half_margin"
-        android:paddingBottom="@dimen/half_margin">
+        android:paddingTop="@dimen/half_margin">
         <TextView
             android:id="@+id/title"
             style="@style/Title"

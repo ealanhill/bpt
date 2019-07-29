@@ -1,6 +1,7 @@
 package co.thrivemobile.bpt.info
 
 import androidx.lifecycle.ViewModel
+import co.thrivemobile.bpt.R
 import co.thrivemobile.bpt.info.items.ArticleItem
 import co.thrivemobile.bpt.info.items.HowToItem
 import co.thrivemobile.bpt.info.items.InfoItem
@@ -16,7 +17,7 @@ class InfoViewModel(articles: Array<String>) : ViewModel() {
     private val infoItemsList = mutableListOf(
         WhatIsItem(),
         HowToItem(),
-        TitleItem()
+        TitleItem(R.string.articles)
     )
 
     init {

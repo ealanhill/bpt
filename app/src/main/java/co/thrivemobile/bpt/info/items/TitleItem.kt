@@ -1,3 +1,3 @@
 package co.thrivemobile.bpt.info.items
 
-data class TitleItem(val title: String = "Title") : InfoItem
+data class TitleItem(val titleRes: Int?) : InfoItem
