@@ -1,9 +1,12 @@
 package co.thrivemobile.bpt.util
 
+import android.view.View
 import android.widget.ImageView
+import androidx.constraintlayout.widget.Group
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import co.thrivemobile.bpt.R
 import com.google.android.material.chip.ChipGroup
 import com.squareup.picasso.Picasso
 
@@ -28,5 +31,19 @@ fun loadImage(view: ImageView?, url: String?) {
 
     Picasso.get()
         .load(url)
+        .placeholder(R.drawable.ic_placeholder)
         .into(view)
+}
+
+@BindingAdapter("groupVisibility")
+fun setGroupVisibility(group: Group?, visible: Boolean?) {
+    if (group == null || visible == null) {
+        return
+    }
+
+    group.visibility = if (visible) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
 }

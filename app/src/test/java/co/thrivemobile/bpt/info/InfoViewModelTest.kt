@@ -1,5 +1,6 @@
 package co.thrivemobile.bpt.info
 
+import co.thrivemobile.bpt.R
 import co.thrivemobile.bpt.info.items.ArticleItem
 import co.thrivemobile.bpt.info.items.HowToItem
 import co.thrivemobile.bpt.info.items.TitleItem
@@ -15,10 +16,18 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(value = [ InstantExecutorExtension::class, MockitoExtension::class ])
 class InfoViewModelTest {
 
+    private val articles = arrayOf(
+        "https://alifeofproductivity.com/calculate-biological-prime-time/",
+        "https://collegeinfogeek.com/track-body-energy-focus-levels/",
+        "https://blog.trello.com/find-productive-hours",
+        "https://www.thesimpledollar.com/managing-the-natural-ups-and-downs-of-your-workweek/",
+        "https://endpoints.elysiumhealth.com/the-complete-guide-to-the-science-of-circadian-rhythms-7b78581cbffa"
+    )
+
     private val defaultList = listOf(
         WhatIsItem(),
         HowToItem(),
-        TitleItem(),
+        TitleItem(R.string.articles),
         ArticleItem("https://alifeofproductivity.com/calculate-biological-prime-time/"),
         ArticleItem("https://collegeinfogeek.com/track-body-energy-focus-levels/"),
         ArticleItem("https://blog.trello.com/find-productive-hours"),
@@ -31,7 +40,7 @@ class InfoViewModelTest {
     @Test
     @DisplayName("When the page first loads, the items are displayed correctly")
     fun defaultItems() {
-        viewModel = InfoViewModel()
+        viewModel = InfoViewModel(articles)
         viewModel.infoItemsData.observeOnce {
             assertTrue(it == defaultList)
         }

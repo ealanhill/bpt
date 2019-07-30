@@ -2,6 +2,7 @@ package co.thrivemobile.bpt.info.vm
 
 import android.os.Build
 import android.text.Html
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.info.items.ArticleItem
 import co.thrivemobile.bpt.util.NonNullLiveData
@@ -12,6 +13,18 @@ class ArticleViewModel(private val network: Network) : ViewModel() {
     val titleLiveData = NonNullLiveData("")
     val descriptionLiveData = NonNullLiveData("")
     val imageUrlLiveData = NonNullLiveData("")
+
+    val showPlaceholderLiveData = MediatorLiveData<Boolean>().apply {
+        this.value = true
+
+        fun showPlaceholder() {
+            this.value = titleLiveData.value.isEmpty() &&
+                    descriptionLiveData.value.isEmpty()
+        }
+
+        addSource(titleLiveData) { showPlaceholder() }
+        addSource(descriptionLiveData) { showPlaceholder() }
+    }
 
     fun loadItem(articleItem: ArticleItem) {
         network.getMetaData(articleItem.url) { metaData ->

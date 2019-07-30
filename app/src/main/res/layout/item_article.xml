@@ -38,6 +38,45 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/article_description"/>
 
+            <ImageView
+                android:id="@+id/article_title_placeholder_1"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_margin="@dimen/half_margin"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_placeholder"
+                android:scaleType="fitXY"
+                tools:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/article_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/article_title_placeholder_2"/>
+
+            <ImageView
+                android:id="@+id/article_title_placeholder_2"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/half_margin"
+                android:layout_marginEnd="@dimen/half_margin"
+                android:layout_marginBottom="@dimen/half_margin"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_placeholder"
+                android:scaleType="fitXY"
+                tools:visibility="gone"
+                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/article_image"
+                app:layout_constraintTop_toBottomOf="@id/article_title_placeholder_1"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/placeholder_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="article_title_placeholder_1,article_title_placeholder_2"
+                app:groupVisibility="@{viewModel.showPlaceholderLiveData}"/>
+
             <TextView
                 android:id="@+id/article_description"
                 style="@style/ArticleDescription"
