@@ -67,4 +67,5 @@ dependencies {
     // mockito
     testImplementation "org.mockito:mockito-core:$Versions.mockitoCore"
     testImplementation "org.mockito:mockito-junit-jupiter:$Versions.mockitoExtension"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$Versions.mockitoKotlin"
 }

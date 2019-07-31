@@ -1,14 +1,15 @@
 package co.thrivemobile.bpt.info.vm
 
-import android.os.Build
-import android.text.Html
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.info.items.ArticleItem
 import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.networking.Network
 
-class ArticleViewModel(private val network: Network) : ViewModel() {
+class ArticleViewModel(
+    private val network: Network,
+    private val decodeHtml: (String) -> String
+) : ViewModel() {
 
     val titleLiveData = NonNullLiveData("")
     val descriptionLiveData = NonNullLiveData("")
@@ -28,19 +29,9 @@ class ArticleViewModel(private val network: Network) : ViewModel() {
 
     fun loadItem(articleItem: ArticleItem) {
         network.getMetaData(articleItem.url) { metaData ->
-
-            val title = decodeHtml(metaData.title).toString()
-            val description = decodeHtml(metaData.description).toString()
-
-            titleLiveData.value = title
-            descriptionLiveData.value = description
+            titleLiveData.value = decodeHtml(metaData.title)
+            descriptionLiveData.value = decodeHtml(metaData.description)
             imageUrlLiveData.value = metaData.imageUrl
         }
-    }
-
-    private fun decodeHtml(html: String) = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-        Html.fromHtml(html)
-    } else {
-        Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
     }
 }

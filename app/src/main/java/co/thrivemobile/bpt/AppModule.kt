@@ -1,5 +1,7 @@
 package co.thrivemobile.bpt
 
+import android.os.Build
+import android.text.Html
 import co.thrivemobile.bpt.entry_form.EntryFormViewModel
 import co.thrivemobile.bpt.info.InfoViewModel
 import co.thrivemobile.bpt.info.vm.ArticleViewModel
@@ -15,6 +17,7 @@ import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneId
 
 private val nowOffsetDateTime = named("nowOffsetDateTime")
+private val decodeHtmlCharacters = named("decodeHtmlCharacters")
 
 val appModule = module {
 
@@ -28,6 +31,13 @@ val appModule = module {
         "https://www.thesimpledollar.com/managing-the-natural-ups-and-downs-of-your-workweek/",
         "https://endpoints.elysiumhealth.com/the-complete-guide-to-the-science-of-circadian-rhythms-7b78581cbffa"
     ) }
+    single<(String) -> String>(decodeHtmlCharacters) { { html ->
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            Html.fromHtml(html)
+        } else {
+            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        }.toString()
+    } }
 
     factory<() -> OffsetDateTime>(nowOffsetDateTime) { { OffsetDateTime.now(ZoneId.systemDefault()) } }
 
@@ -35,5 +45,5 @@ val appModule = module {
     viewModel { EntryFormViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { SparkViewModel(get(), get(nowOffsetDateTime)) }
     viewModel { InfoViewModel(get()) }
-    viewModel { ArticleViewModel(get()) }
+    viewModel { ArticleViewModel(get(), get(decodeHtmlCharacters)) }
 }
