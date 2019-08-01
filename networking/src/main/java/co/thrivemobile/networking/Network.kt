@@ -1,8 +1,9 @@
 package co.thrivemobile.networking
 
 import androidx.annotation.WorkerThread
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -10,21 +11,18 @@ import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.regex.Matcher
 
-class Network {
+class Network(
+    mainDispatcher: CoroutineDispatcher,
+    ioDispatcher: CoroutineDispatcher,
+    private val client: OkHttpClient
+) {
 
-    private var client: OkHttpClient
-
-    init {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
-        }
-        client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    }
+    private val job = SupervisorJob()
+    private val mainScope = CoroutineScope(mainDispatcher + job)
+    private val ioScope = CoroutineScope(ioDispatcher + job)
 
     fun getMetaData(url: String, updateResults: (MetaData) -> Unit) {
-        GlobalScope.launch(Dispatchers.Main) {
+        mainScope.launch {
             val result = requestUrl(url)
             updateResults(extractMetaData(result))
         }
@@ -36,7 +34,7 @@ class Network {
             .url(url)
             .build()
 
-        return withContext(Dispatchers.IO) {
+        return withContext(ioScope.coroutineContext) {
             client.newCall(request)
                 .execute()
                 .use { it.body?.string() ?: "" }

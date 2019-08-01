@@ -9,6 +9,9 @@ import co.thrivemobile.bpt.statistics.StatisticsViewModel
 import co.thrivemobile.bpt.statistics.vm.SparkViewModel
 import co.thrivemobile.networking.Network
 import co.thrivemobile.repository.BptDatabase
+import kotlinx.coroutines.Dispatchers
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -18,12 +21,27 @@ import org.threeten.bp.ZoneId
 
 private val nowOffsetDateTime = named("nowOffsetDateTime")
 private val decodeHtmlCharacters = named("decodeHtmlCharacters")
+private val ioDispatcher = named("ioDispatcher")
+private val mainDispatcher = named("mainDispatcher")
+private val okHttpClient = named("OkHttpClient")
 
 val appModule = module {
 
     single { BptDatabase.getInstance(androidContext()) }
     single { BptDatabase.getInstance(androidContext()).bptDao() }
-    single { Network() }
+
+    single(mainDispatcher) { Dispatchers.Main }
+    single(ioDispatcher) { Dispatchers.IO }
+    single(okHttpClient) {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC
+        }
+        return@single OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    single { Network(get(mainDispatcher), get(ioDispatcher), get(okHttpClient)) }
     single { arrayOf(
         "https://alifeofproductivity.com/calculate-biological-prime-time/",
         "https://collegeinfogeek.com/track-body-energy-focus-levels/",

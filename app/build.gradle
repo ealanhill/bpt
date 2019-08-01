@@ -47,6 +47,14 @@ dependencies {
     // Picasso
     implementation "com.squareup.picasso:picasso:$Versions.picasso"
 
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$Versions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$Versions.okHttp"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+
     implementation "com.google.android.material:material:$Versions.materialComponents"
     implementation "androidx.constraintlayout:constraintlayout:$Versions.constraintLayout"
     implementation "com.robinhood.spark:spark:$Versions.spark"
