@@ -5,8 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import co.thrivemobile.repository.entities.DatabaseArticle
+import co.thrivemobile.repository.entities.Day
+import co.thrivemobile.repository.entities.Entry
 
-@Database(entities = [Day::class, Entry::class], version = 1)
+@Database(entities = [Day::class, Entry::class, DatabaseArticle::class], version = 1)
 @TypeConverters(BptTypeConverters::class)
 abstract class BptDatabase : RoomDatabase() {
 
@@ -20,7 +23,8 @@ abstract class BptDatabase : RoomDatabase() {
                     context.applicationContext,
                     BptDatabase::class.java,
                     DATABASE_NAME
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
             }
             return INSTANCE!!
         }

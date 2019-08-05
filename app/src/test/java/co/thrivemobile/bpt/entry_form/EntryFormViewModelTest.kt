@@ -3,7 +3,7 @@ package co.thrivemobile.bpt.entry_form
 import co.thrivemobile.bpt.util.InstantExecutorExtension
 import co.thrivemobile.bpt.util.observeOnce
 import co.thrivemobile.repository.BptDao
-import co.thrivemobile.repository.Entry
+import co.thrivemobile.repository.entities.Entry
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull

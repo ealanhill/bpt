@@ -1,4 +1,4 @@
-package co.thrivemobile.repository
+package co.thrivemobile.repository.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.statistics.SparkPoint
 import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.repository.BptDao
-import co.thrivemobile.repository.Entry
+import co.thrivemobile.repository.entities.Entry
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 

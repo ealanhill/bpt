@@ -3,6 +3,8 @@ package co.thrivemobile.repository
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import co.thrivemobile.repository.entities.Day
+import co.thrivemobile.repository.entities.Entry
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

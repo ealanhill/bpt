@@ -5,7 +5,7 @@ import co.thrivemobile.bpt.util.InstantExecutorExtension
 import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.bpt.util.observeOnce
 import co.thrivemobile.repository.BptDao
-import co.thrivemobile.repository.Entry
+import co.thrivemobile.repository.entities.Entry
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -23,39 +23,39 @@ class SparkViewModelTest {
     companion object {
         private val allEntries = listOf(
             Entry(id = 0,
-                  date = OffsetDateTime.of(2019, 5, 1, 13, 0, 0, 0, ZoneOffset.UTC),
-                  time = OffsetTime.of(13, 0, 0, 0, ZoneOffset.UTC),
-                  energy = 5,
-                  focus = 5,
-                  motivation = 5
+                                                      date = OffsetDateTime.of(2019, 5, 1, 13, 0, 0, 0, ZoneOffset.UTC),
+                                                      time = OffsetTime.of(13, 0, 0, 0, ZoneOffset.UTC),
+                                                      energy = 5,
+                                                      focus = 5,
+                                                      motivation = 5
             ),
             Entry(id = 1,
-                  date = OffsetDateTime.of(2019, 5, 1, 14, 0, 0, 0, ZoneOffset.UTC),
-                  time = OffsetTime.of(14, 0, 0, 0, ZoneOffset.UTC),
-                  energy = 6,
-                  focus = 7,
-                  motivation = 8
+                                                      date = OffsetDateTime.of(2019, 5, 1, 14, 0, 0, 0, ZoneOffset.UTC),
+                                                      time = OffsetTime.of(14, 0, 0, 0, ZoneOffset.UTC),
+                                                      energy = 6,
+                                                      focus = 7,
+                                                      motivation = 8
             ),
             Entry(id = 2,
-                  date = OffsetDateTime.of(2019, 5, 1, 15, 0, 0, 0, ZoneOffset.UTC),
-                  time = OffsetTime.of(15, 0, 0, 0, ZoneOffset.UTC),
-                  energy = 2,
-                  focus = 2,
-                  motivation = 2
+                                                      date = OffsetDateTime.of(2019, 5, 1, 15, 0, 0, 0, ZoneOffset.UTC),
+                                                      time = OffsetTime.of(15, 0, 0, 0, ZoneOffset.UTC),
+                                                      energy = 2,
+                                                      focus = 2,
+                                                      motivation = 2
             ),
             Entry(id = 3,
-                  date = OffsetDateTime.of(2019, 5, 1, 16, 0, 0, 0, ZoneOffset.UTC),
-                  time = OffsetTime.of(16, 0, 0, 0, ZoneOffset.UTC),
-                  energy = 4,
-                  focus = 5,
-                  motivation = 6
+                                                      date = OffsetDateTime.of(2019, 5, 1, 16, 0, 0, 0, ZoneOffset.UTC),
+                                                      time = OffsetTime.of(16, 0, 0, 0, ZoneOffset.UTC),
+                                                      energy = 4,
+                                                      focus = 5,
+                                                      motivation = 6
             ),
             Entry(id = 4,
-                  date = OffsetDateTime.of(2019, 5, 1, 17, 0, 0, 0, ZoneOffset.UTC),
-                  time = OffsetTime.of(17, 0, 0, 0, ZoneOffset.UTC),
-                  energy = 7,
-                  focus = 6,
-                  motivation = 5
+                                                      date = OffsetDateTime.of(2019, 5, 1, 17, 0, 0, 0, ZoneOffset.UTC),
+                                                      time = OffsetTime.of(17, 0, 0, 0, ZoneOffset.UTC),
+                                                      energy = 7,
+                                                      focus = 6,
+                                                      motivation = 5
             )
         )
 
@@ -92,11 +92,11 @@ class SparkViewModelTest {
         viewModel = SparkViewModel(mockRepo, now)
 
         val newEntry = Entry(id = 5,
-                             date = OffsetDateTime.of(2019, 5, 1, 18, 0, 0, 0, ZoneOffset.UTC),
-                             time = OffsetTime.of(18, 0, 0, 0, ZoneOffset.UTC),
-                             energy = 4,
-                             focus = 4,
-                             motivation = 5
+                                                                 date = OffsetDateTime.of(2019, 5, 1, 18, 0, 0, 0, ZoneOffset.UTC),
+                                                                 time = OffsetTime.of(18, 0, 0, 0, ZoneOffset.UTC),
+                                                                 energy = 4,
+                                                                 focus = 4,
+                                                                 motivation = 5
         )
         val newEntries = allEntries.toMutableList()
         newEntries.add(newEntry)
@@ -118,11 +118,11 @@ class SparkViewModelTest {
         viewModel = SparkViewModel(mockRepo, now)
 
         val newEntry = Entry(id = 4,
-                             date = OffsetDateTime.of(2019, 5, 1, 17, 0, 0, 0, ZoneOffset.UTC),
-                             time = OffsetTime.of(17, 0, 0, 0, ZoneOffset.UTC),
-                             energy = 7,
-                             focus = 6,
-                             motivation = 5
+                                                                 date = OffsetDateTime.of(2019, 5, 1, 17, 0, 0, 0, ZoneOffset.UTC),
+                                                                 time = OffsetTime.of(17, 0, 0, 0, ZoneOffset.UTC),
+                                                                 energy = 7,
+                                                                 focus = 6,
+                                                                 motivation = 5
         )
         val newEntries = allEntries.toMutableList()
         newEntries.add(newEntry)

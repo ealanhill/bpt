@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.logging.HttpLoggingInterceptor
 import java.util.regex.Matcher
 
 class Network(
@@ -21,10 +20,10 @@ class Network(
     private val mainScope = CoroutineScope(mainDispatcher + job)
     private val ioScope = CoroutineScope(ioDispatcher + job)
 
-    fun getMetaData(url: String, updateResults: (MetaData) -> Unit) {
+    fun getMetaData(url: String, updateResults: (MetaData, String) -> Unit) {
         mainScope.launch {
             val result = requestUrl(url)
-            updateResults(extractMetaData(result))
+            updateResults(extractMetaData(result), result)
         }
     }
 

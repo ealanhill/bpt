@@ -3,11 +3,12 @@ package co.thrivemobile.bpt.info.vm
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import co.thrivemobile.bpt.info.items.ArticleItem
+import co.thrivemobile.bpt.repository.Repository
 import co.thrivemobile.bpt.util.NonNullLiveData
 import co.thrivemobile.networking.Network
 
 class ArticleViewModel(
-    private val network: Network,
+    private val repository: Repository,
     private val decodeHtml: (String) -> String
 ) : ViewModel() {
 
@@ -28,10 +29,9 @@ class ArticleViewModel(
     }
 
     fun loadItem(articleItem: ArticleItem) {
-        network.getMetaData(articleItem.url) { metaData ->
-            titleLiveData.value = decodeHtml(metaData.title)
-            descriptionLiveData.value = decodeHtml(metaData.description)
-            imageUrlLiveData.value = metaData.imageUrl
-        }
+        val metadata = repository.getArticleByUrl(articleItem.url).metadata
+        titleLiveData.value = decodeHtml(metadata.title)
+        descriptionLiveData.value = decodeHtml(metadata.description)
+        imageUrlLiveData.value = metadata.imageUrl
     }
 }

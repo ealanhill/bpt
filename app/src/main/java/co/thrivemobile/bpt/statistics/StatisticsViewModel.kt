@@ -9,7 +9,7 @@ import co.thrivemobile.bpt.statistics.items.HourItem
 import co.thrivemobile.bpt.statistics.items.SparkItem
 import co.thrivemobile.bpt.statistics.items.StatisticsItem
 import co.thrivemobile.repository.BptDao
-import co.thrivemobile.repository.Entry
+import co.thrivemobile.repository.entities.Entry
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 

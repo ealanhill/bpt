@@ -5,6 +5,7 @@ import android.text.Html
 import co.thrivemobile.bpt.entry_form.EntryFormViewModel
 import co.thrivemobile.bpt.info.InfoViewModel
 import co.thrivemobile.bpt.info.vm.ArticleViewModel
+import co.thrivemobile.bpt.repository.Repository
 import co.thrivemobile.bpt.statistics.StatisticsViewModel
 import co.thrivemobile.bpt.statistics.vm.SparkViewModel
 import co.thrivemobile.networking.Network
@@ -24,11 +25,14 @@ private val decodeHtmlCharacters = named("decodeHtmlCharacters")
 private val ioDispatcher = named("ioDispatcher")
 private val mainDispatcher = named("mainDispatcher")
 private val okHttpClient = named("OkHttpClient")
+private val network = named("Network")
+private val dao = named("DAO")
+private val repository = named("Repository")
 
 val appModule = module {
 
     single { BptDatabase.getInstance(androidContext()) }
-    single { BptDatabase.getInstance(androidContext()).bptDao() }
+    single(dao) { BptDatabase.getInstance(androidContext()).bptDao() }
 
     single(mainDispatcher) { Dispatchers.Main }
     single(ioDispatcher) { Dispatchers.IO }
@@ -41,7 +45,7 @@ val appModule = module {
             .build()
     }
 
-    single { Network(get(mainDispatcher), get(ioDispatcher), get(okHttpClient)) }
+    single(network) { Network(get(mainDispatcher), get(ioDispatcher), get(okHttpClient)) }
     single { arrayOf(
         "https://alifeofproductivity.com/calculate-biological-prime-time/",
         "https://collegeinfogeek.com/track-body-energy-focus-levels/",
@@ -57,11 +61,13 @@ val appModule = module {
         }.toString()
     } }
 
+    single(repository) { Repository(get(dao), get(network)) }
+
     factory<() -> OffsetDateTime>(nowOffsetDateTime) { { OffsetDateTime.now(ZoneId.systemDefault()) } }
 
-    viewModel { StatisticsViewModel(get(), get(nowOffsetDateTime)) }
-    viewModel { EntryFormViewModel(get(), get(nowOffsetDateTime)) }
-    viewModel { SparkViewModel(get(), get(nowOffsetDateTime)) }
+    viewModel { StatisticsViewModel(get(dao), get(nowOffsetDateTime)) }
+    viewModel { EntryFormViewModel(get(dao), get(nowOffsetDateTime)) }
+    viewModel { SparkViewModel(get(dao), get(nowOffsetDateTime)) }
     viewModel { InfoViewModel(get()) }
-    viewModel { ArticleViewModel(get(), get(decodeHtmlCharacters)) }
+    viewModel { ArticleViewModel(get(repository), get(decodeHtmlCharacters)) }
 }
