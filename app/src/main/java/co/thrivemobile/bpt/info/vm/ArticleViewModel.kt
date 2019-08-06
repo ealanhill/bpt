@@ -28,10 +28,12 @@ class ArticleViewModel(
         addSource(descriptionLiveData) { showPlaceholder() }
     }
 
-    fun loadItem(articleItem: ArticleItem) {
-        val metadata = repository.getArticleByUrl(articleItem.url).metadata
-        titleLiveData.value = decodeHtml(metadata.title)
-        descriptionLiveData.value = decodeHtml(metadata.description)
-        imageUrlLiveData.value = metadata.imageUrl
-    }
+    fun loadItem(articleItem: ArticleItem) =
+        repository.getArticleByUrl(articleItem.url) { article ->
+            val metadata = article.metadata
+            titleLiveData.value = decodeHtml(metadata.title)
+            descriptionLiveData.value = decodeHtml(metadata.description)
+            imageUrlLiveData.value = metadata.imageUrl
+        }
+
 }

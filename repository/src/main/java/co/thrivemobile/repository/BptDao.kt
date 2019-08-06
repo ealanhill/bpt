@@ -23,7 +23,7 @@ interface BptDao {
     fun getEntriesForDay(date: OffsetDateTime): LiveData<List<Entry>>
 
     @Query("SELECT * FROM ARTICLES WHERE url = :url")
-    fun getArticle(url: String): DatabaseArticle?
+    suspend fun getArticle(url: String): DatabaseArticle?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEntry(entry: Entry)
