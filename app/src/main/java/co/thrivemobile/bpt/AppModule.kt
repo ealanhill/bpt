@@ -61,7 +61,7 @@ val appModule = module {
         }.toString()
     } }
 
-    single(repository) { Repository(get(dao), get(network)) }
+    single(repository) { Repository(get(ioDispatcher), get(dao), get(network)) }
 
     factory<() -> OffsetDateTime>(nowOffsetDateTime) { { OffsetDateTime.now(ZoneId.systemDefault()) } }
 

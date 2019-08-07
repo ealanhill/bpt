@@ -1,13 +1,23 @@
 package co.thrivemobile.bpt.repository
 
-import co.thrivemobile.bpt.util.ioThread
 import co.thrivemobile.networking.MetaData
 import co.thrivemobile.networking.Network
 import co.thrivemobile.repository.BptDao
 import co.thrivemobile.repository.entities.DatabaseArticle
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class Repository(private val database: BptDao, private val network: Network) {
+class Repository(
+    ioDispatcher: CoroutineDispatcher,
+    private val database: BptDao,
+    private val network: Network
+) {
+
+    private val job = SupervisorJob()
+    private val ioScope = CoroutineScope(ioDispatcher + job)
 
     fun getArticleByUrl(url: String, onResult: (Article) -> Unit) {
         val databaseArticle = runBlocking { database.getArticle(url) }
@@ -38,7 +48,7 @@ class Repository(private val database: BptDao, private val network: Network) {
             imageUrl = metaData.imageUrl,
             content = content
         )
-        ioThread { database.insertArticle(newDatabaseArticle) }
+        ioScope.launch { database.insertArticle(newDatabaseArticle) }
         return Article(metaData, content)
     }
 }

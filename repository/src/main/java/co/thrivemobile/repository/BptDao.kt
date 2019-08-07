@@ -32,5 +32,5 @@ interface BptDao {
     fun insertDay(day: Day)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticle(databaseArticle: DatabaseArticle)
+    suspend fun insertArticle(databaseArticle: DatabaseArticle)
 }
