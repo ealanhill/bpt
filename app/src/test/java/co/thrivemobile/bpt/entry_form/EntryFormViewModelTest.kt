@@ -60,7 +60,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a valid value for energy don't show error")
+    @DisplayName("When user enters a valid value for energy don't show hasError")
     fun validEnergyValue() {
         viewModel.energyLiveData.value = 5
 
@@ -76,7 +76,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters 0 for energy then show the error")
+    @DisplayName("When user enters 0 for energy then show the hasError")
     fun invalidEnergyValueZero() {
         viewModel.energyLiveData.value = 0
 
@@ -92,7 +92,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a value greater than 10 for energy then show the error")
+    @DisplayName("When user enters a value greater than 10 for energy then show the hasError")
     fun invalidEnergyValueTen() {
         viewModel.energyLiveData.value = 15
 
@@ -108,7 +108,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a null value for energy then show the error")
+    @DisplayName("When user enters a null value for energy then show the hasError")
     fun energyNullValue() {
         viewModel.energyLiveData.value = null
 
@@ -124,7 +124,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When a user enters a negative value for energy then show error")
+    @DisplayName("When a user enters a negative value for energy then show hasError")
     fun energyNegativeValue() {
         viewModel.energyLiveData.value = -1
 
@@ -140,7 +140,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters an energy value at the edge of the value range don't show error")
+    @DisplayName("When user enters an energy value at the edge of the value range don't show hasError")
     fun energyEdgeCase() {
         viewModel.energyLiveData.value = 1
         viewModel.errorLiveData.observeOnce {
@@ -166,7 +166,7 @@ class EntryFormViewModelTest {
     // *********
 
     @Test
-    @DisplayName("When user enters a valid value for focus don't show error")
+    @DisplayName("When user enters a valid value for focus don't show hasError")
     fun validFocusValue() {
         viewModel.focusLiveData.value = 5
 
@@ -182,7 +182,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters 0 for focus then show the error")
+    @DisplayName("When user enters 0 for focus then show the hasError")
     fun invalidFocusValueZero() {
         viewModel.focusLiveData.value = 0
 
@@ -198,7 +198,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a value greater than 10 for focus then show the error")
+    @DisplayName("When user enters a value greater than 10 for focus then show the hasError")
     fun invalidFocusValueTen() {
         viewModel.focusLiveData.value = 15
 
@@ -214,7 +214,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a null value for focus then show the error")
+    @DisplayName("When user enters a null value for focus then show the hasError")
     fun focusBlankString() {
         viewModel.focusLiveData.value = null
 
@@ -230,7 +230,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When a user enters a negative value for focus then show error")
+    @DisplayName("When a user enters a negative value for focus then show hasError")
     fun focusNegativeValue() {
         viewModel.focusLiveData.value = -1
 
@@ -246,7 +246,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a focus value at the edge of the value range don't show error")
+    @DisplayName("When user enters a focus value at the edge of the value range don't show hasError")
     fun focusEdgeCase() {
         viewModel.focusLiveData.value = 1
         viewModel.errorLiveData.observeOnce {
@@ -272,7 +272,7 @@ class EntryFormViewModelTest {
     // *********
 
     @Test
-    @DisplayName("When user enters a valid value for motivation don't show error")
+    @DisplayName("When user enters a valid value for motivation don't show hasError")
     fun validMotivationValue() {
         viewModel.motivationLiveData.value = 5
 
@@ -288,7 +288,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters 0 for motivation then show the error")
+    @DisplayName("When user enters 0 for motivation then show the hasError")
     fun invalidMotivationValueZero() {
         viewModel.motivationLiveData.value = 0
 
@@ -304,7 +304,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a value greater than 10 for motivation then show the error")
+    @DisplayName("When user enters a value greater than 10 for motivation then show the hasError")
     fun invalidMotivationValueTen() {
         viewModel.motivationLiveData.value = 15
 
@@ -320,7 +320,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a null value for motivation then show the error")
+    @DisplayName("When user enters a null value for motivation then show the hasError")
     fun motivationBlankString() {
         viewModel.motivationLiveData.value = null
 
@@ -336,7 +336,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When a user enters a negative value for motivation then show error")
+    @DisplayName("When a user enters a negative value for motivation then show hasError")
     fun motivationNegativeValue() {
         viewModel.motivationLiveData.value = -1
 
@@ -352,7 +352,7 @@ class EntryFormViewModelTest {
     }
 
     @Test
-    @DisplayName("When user enters a motivation value at the edge of the value range don't show error")
+    @DisplayName("When user enters a motivation value at the edge of the value range don't show hasError")
     fun motivationEdgeCase() {
         viewModel.motivationLiveData.value = 1
         viewModel.errorLiveData.observeOnce {

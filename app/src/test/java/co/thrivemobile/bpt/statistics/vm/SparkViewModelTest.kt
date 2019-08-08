@@ -74,7 +74,7 @@ class SparkViewModelTest {
     private lateinit var viewModel: SparkViewModel
 
     @Test
-    @DisplayName("When loading, ensure we map the entries to the points correctly")
+    @DisplayName("When isLoading, ensure we map the entries to the points correctly")
     fun loadEntries() {
         val entriesLiveData = NonNullLiveData(allEntries)
         `when`(mockRepo.getEntriesForDay(dateTime)).thenReturn(entriesLiveData)

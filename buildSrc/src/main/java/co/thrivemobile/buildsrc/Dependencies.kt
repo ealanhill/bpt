@@ -7,7 +7,7 @@ object Versions {
     val junit = "5.3.2"
     val materialComponents = "1.0.0"
     val constraintLayout = "2.0.0-beta2"
-    val appComponent = "1.0.2"
+    val appComponent = "1.1.0-rc01"
     val spark = "1.2.0"
     val koin = "2.0.1"
     val mockitoCore = "3.0.0"

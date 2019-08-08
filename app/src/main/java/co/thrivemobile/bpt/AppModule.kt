@@ -8,6 +8,7 @@ import co.thrivemobile.bpt.info.vm.ArticleViewModel
 import co.thrivemobile.bpt.repository.Repository
 import co.thrivemobile.bpt.statistics.StatisticsViewModel
 import co.thrivemobile.bpt.statistics.vm.SparkViewModel
+import co.thrivemobile.bpt.web.WebViewModel
 import co.thrivemobile.networking.Network
 import co.thrivemobile.repository.BptDatabase
 import kotlinx.coroutines.Dispatchers
@@ -70,4 +71,5 @@ val appModule = module {
     viewModel { SparkViewModel(get(dao), get(nowOffsetDateTime)) }
     viewModel { InfoViewModel(get()) }
     viewModel { ArticleViewModel(get(repository), get(decodeHtmlCharacters)) }
+    viewModel { WebViewModel(get(ioDispatcher), get(dao)) }
 }
