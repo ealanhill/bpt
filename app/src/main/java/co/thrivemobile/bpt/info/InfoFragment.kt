@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.thrivemobile.bpt.databinding.FragmentInfoBinding
+import co.thrivemobile.bpt.web.OpenWebView
 import org.koin.android.ext.android.inject
 
 class InfoFragment : Fragment() {
@@ -21,7 +22,11 @@ class InfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        infoAdapter = InfoAdapter(viewLifecycleOwner)
+        infoAdapter = InfoAdapter(viewLifecycleOwner) { url ->
+            if (activity is OpenWebView) {
+                (activity as OpenWebView).openWebView(context!!, url)
+            }
+        }
 
         binding = FragmentInfoBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner

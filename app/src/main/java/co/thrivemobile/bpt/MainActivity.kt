@@ -1,5 +1,6 @@
 package co.thrivemobile.bpt
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -12,11 +13,12 @@ import co.thrivemobile.bpt.entry_form.EntryFormDialogFragment
 import co.thrivemobile.bpt.entry_form.OpenEntryForm
 import co.thrivemobile.bpt.info.InfoFragment
 import co.thrivemobile.bpt.statistics.StatisticsFragment
+import co.thrivemobile.bpt.web.OpenWebView
+import co.thrivemobile.bpt.web.WebViewActivity
 import co.thrivemobile.uicomponents.SmartFragmentStatePagerAdapter
-import java.lang.IllegalArgumentException
 
 
-class MainActivity : AppCompatActivity(), OpenEntryForm {
+class MainActivity : AppCompatActivity(), OpenEntryForm, OpenWebView {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var pagerAdapter: PagerAdapter
@@ -37,6 +39,10 @@ class MainActivity : AppCompatActivity(), OpenEntryForm {
     override fun openEntryForm() {
         val entryDialogFragment = EntryFormDialogFragment()
         entryDialogFragment.show(supportFragmentManager, "Entry Form")
+    }
+
+    override fun openWebView(context: Context, url: String) {
+        WebViewActivity.start(context, url)
     }
 
     private fun onMenuItemSelected(menuItem: MenuItem, viewPager: ViewPager): Boolean {

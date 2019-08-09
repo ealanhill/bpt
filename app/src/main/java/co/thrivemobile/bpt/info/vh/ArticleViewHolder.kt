@@ -8,7 +8,8 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ArticleViewHolder(
-    private val binding: ItemArticleBinding
+    private val binding: ItemArticleBinding,
+    private val openUrl: (String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), InfoViewHolder<ArticleItem>, KoinComponent {
 
     private val articleViewModel: ArticleViewModel by inject()
@@ -19,5 +20,6 @@ class ArticleViewHolder(
         }
 
         articleViewModel.loadItem(item)
+        itemView.setOnClickListener { openUrl(item.url) }
     }
 }

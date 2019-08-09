@@ -4,11 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import co.thrivemobile.bpt.databinding.ActivityWebViewBinding
-import co.thrivemobile.bpt.util.show
-import org.koin.android.ext.android.inject
 
 class WebViewActivity : AppCompatActivity() {
 
@@ -24,7 +22,6 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    private val webViewModel: WebViewModel by inject()
     private lateinit var binding: ActivityWebViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,17 +31,12 @@ class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebViewBinding.inflate(inflater)
         setContentView(binding.root)
 
-        webViewModel.webViewState.observe(this) { handleWebViewState(it) }
-    }
+        binding.webView.apply {
+            settings.javaScriptEnabled = true
+            webViewClient = WebViewClient()
 
-    private fun handleWebViewState(webViewState: WebViewState) {
-        binding.progressBar.show(webViewState.isLoading)
-        binding.errorText.show(webViewState.hasError)
-
-        if (webViewState.showContent) {
-            binding.webView.show()
-
-            binding.webView.loadData(webViewState.content, "text/html", "base64")
+            val urlToLoad = intent.getStringExtra(URL_TO_LOAD)
+            loadUrl(urlToLoad)
         }
     }
 }

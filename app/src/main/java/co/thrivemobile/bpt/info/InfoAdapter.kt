@@ -23,7 +23,8 @@ import co.thrivemobile.bpt.info.vh.TitleViewHolder
 import co.thrivemobile.bpt.info.vh.WhatIsViewHolder
 
 class InfoAdapter(
-    private val viewLifecycleOwner: LifecycleOwner
+    private val viewLifecycleOwner: LifecycleOwner,
+    private val showUrl: (String) -> Unit
 ) : ListAdapter<InfoItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -117,6 +118,6 @@ class InfoAdapter(
         val binding = ItemArticleBinding.inflate(inflater, parent, false).apply {
             lifecycleOwner = viewLifecycleOwner
         }
-        return ArticleViewHolder(binding)
+        return ArticleViewHolder(binding) { showUrl(it) }
     }
 }
