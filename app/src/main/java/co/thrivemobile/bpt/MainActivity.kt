@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
+import co.thrivemobile.bpt.account.AccountFragment
 import co.thrivemobile.bpt.databinding.ActivityMainBinding
 import co.thrivemobile.bpt.entry_form.EntryFormDialogFragment
 import co.thrivemobile.bpt.entry_form.OpenEntryForm
@@ -39,10 +40,6 @@ class MainActivity : AppCompatActivity(), OpenEntryForm, OpenWebView {
         entryDialogFragment.show(supportFragmentManager, "Entry Form")
     }
 
-//    override fun openWebView(context: Context, url: String) {
-//        WebViewActivity.start(context, url)
-//    }
-
     private fun onMenuItemSelected(menuItem: MenuItem, viewPager: ViewPager): Boolean {
         val currentItem = when (menuItem.itemId) {
             R.id.menu_chart -> 0
@@ -66,6 +63,7 @@ class MainActivity : AppCompatActivity(), OpenEntryForm, OpenWebView {
             return when (position) {
                 0 -> StatisticsFragment()
                 1 -> InfoFragment()
+                2 -> AccountFragment()
                 else -> throw IllegalArgumentException("Unknown position")
             }
         }

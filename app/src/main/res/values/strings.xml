@@ -24,4 +24,7 @@
     <string name="title_network">Network</string>
 
     <string name="error_web_view">Sorry, an error has occurred while loading this web page. Please try again later.</string>
+
+    <string name="generic_salutation">Hello!</string>
+    <string name="specific_salutation">Hello, %1$s!</string>
 </resources>
