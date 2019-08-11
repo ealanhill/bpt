@@ -36,6 +36,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$Versions.appComponent"
     implementation "androidx.appcompat:appcompat-resources:$Versions.appComponent"
     implementation "androidx.core:core-ktx:$Versions.ktxCore"
+    implementation "androidx.browser:browser:$Versions.browser"
 
     // Room
     implementation "androidx.room:room-runtime:$Versions.room"

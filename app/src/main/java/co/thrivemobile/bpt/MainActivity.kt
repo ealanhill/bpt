@@ -1,6 +1,5 @@
 package co.thrivemobile.bpt
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -14,7 +13,6 @@ import co.thrivemobile.bpt.entry_form.OpenEntryForm
 import co.thrivemobile.bpt.info.InfoFragment
 import co.thrivemobile.bpt.statistics.StatisticsFragment
 import co.thrivemobile.bpt.web.OpenWebView
-import co.thrivemobile.bpt.web.WebViewActivity
 import co.thrivemobile.uicomponents.SmartFragmentStatePagerAdapter
 
 
@@ -41,9 +39,9 @@ class MainActivity : AppCompatActivity(), OpenEntryForm, OpenWebView {
         entryDialogFragment.show(supportFragmentManager, "Entry Form")
     }
 
-    override fun openWebView(context: Context, url: String) {
-        WebViewActivity.start(context, url)
-    }
+//    override fun openWebView(context: Context, url: String) {
+//        WebViewActivity.start(context, url)
+//    }
 
     private fun onMenuItemSelected(menuItem: MenuItem, viewPager: ViewPager): Boolean {
         val currentItem = when (menuItem.itemId) {
