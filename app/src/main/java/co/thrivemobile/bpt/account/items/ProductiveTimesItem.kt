@@ -1,3 +1,3 @@
 package co.thrivemobile.bpt.account.items
 
-class ProductiveTimesItem : AccountItem
+data class ProductiveTimesItem(val productivityCards: List<ProductivityCardItem>) : AccountItem

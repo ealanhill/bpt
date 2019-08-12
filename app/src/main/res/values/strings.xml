@@ -27,4 +27,8 @@
 
     <string name="generic_salutation">Hello!</string>
     <string name="specific_salutation">Hello, %1$s!</string>
+    <string name="most_productive_day">Your most productive day is:</string>
+    <string name="most_productive_hour">Your most productive time of day is:</string>
+    <string name="least_productive_day">Your least productive day is:</string>
+    <string name="least_productive_hour">You least productive time of day is:</string>
 </resources>
