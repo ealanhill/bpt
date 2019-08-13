@@ -15,4 +15,11 @@ data class Entry(
     @ColumnInfo(name = "focus") val focus: Int = 0,
     @ColumnInfo(name = "motivation") val motivation: Int = 0,
     @ColumnInfo(name = "notes") val notes: String = ""
-)
+) {
+
+    val average: Float
+        get() {
+            val total = energy + focus + motivation
+            return total.toFloat() / 3f
+        }
+}
