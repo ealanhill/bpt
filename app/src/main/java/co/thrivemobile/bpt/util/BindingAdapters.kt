@@ -2,6 +2,7 @@ package co.thrivemobile.bpt.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
@@ -45,5 +46,19 @@ fun setGroupVisibility(group: Group?, visible: Boolean?) {
         View.VISIBLE
     } else {
         View.GONE
+    }
+}
+
+@BindingAdapter(value = ["textRes", "textFormat"])
+fun setTextRes(textView: TextView?, textRes: Int?, textFormat: String?) {
+    if (textView == null || textRes == null) {
+        return
+    }
+
+    if (textFormat.isNullOrEmpty()) {
+        textView.setText(textRes)
+    } else {
+        val context = textView.context
+        textView.text = context.getString(textRes, textFormat)
     }
 }
