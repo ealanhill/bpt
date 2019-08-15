@@ -8,8 +8,17 @@ import androidx.room.TypeConverters
 import co.thrivemobile.repository.entities.DatabaseArticle
 import co.thrivemobile.repository.entities.Day
 import co.thrivemobile.repository.entities.Entry
+import co.thrivemobile.repository.entities.Settings
 
-@Database(entities = [Day::class, Entry::class, DatabaseArticle::class], version = 1)
+@Database(
+    entities = [
+        Day::class,
+        Entry::class,
+        DatabaseArticle::class,
+        Settings::class
+    ],
+    version = 1
+)
 @TypeConverters(BptTypeConverters::class)
 abstract class BptDatabase : RoomDatabase() {
 

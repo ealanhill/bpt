@@ -8,6 +8,7 @@ import androidx.room.Query
 import co.thrivemobile.repository.entities.DatabaseArticle
 import co.thrivemobile.repository.entities.Day
 import co.thrivemobile.repository.entities.Entry
+import co.thrivemobile.repository.entities.Settings
 import org.threeten.bp.OffsetDateTime
 
 @Dao
@@ -25,6 +26,9 @@ interface BptDao {
     @Query("SELECT * FROM ARTICLES WHERE url = :url")
     suspend fun getArticle(url: String): DatabaseArticle?
 
+    @Query("SELECT * FROM SETTINGS")
+    fun getSettings(): LiveData<Settings>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEntry(entry: Entry)
 
@@ -33,4 +37,7 @@ interface BptDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticle(databaseArticle: DatabaseArticle)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSettings(settings: Settings)
 }
