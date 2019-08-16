@@ -27,9 +27,7 @@ class SettingsViewModelTest {
         val settings = Settings(
             userFirstName = "",
             userLastName = "",
-            userEmail = "",
-            startTrackingTime = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC),
-            endTrackingTime = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
+            userEmail = ""
         )
         whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
 
@@ -45,15 +43,145 @@ class SettingsViewModelTest {
         val settings = Settings(
             userFirstName = "First",
             userLastName = "",
-            userEmail = "",
-            startTrackingTime = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC),
-            endTrackingTime = OffsetTime.of(19, 30, 0, 0, ZoneOffset.UTC)
+            userEmail = ""
         )
         whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
 
         val viewModel = SettingsViewModel(mockDao)
         viewModel.nameLiveData.observeOnce {
             assertTrue(it == "${settings.userFirstName} ")
+        }
+    }
+
+    @Test
+    @DisplayName("When only last name is provided in the settings then show that")
+    fun lastNameOnly() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "Last",
+            userEmail = ""
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.nameLiveData.observeOnce {
+            assertTrue(it == " ${settings.userLastName}")
+        }
+    }
+
+    @Test
+    @DisplayName("When first and last name are provided in the settings then show that")
+    fun bothNames() {
+        val settings = Settings(
+            userFirstName = "First",
+            userLastName = "Last",
+            userEmail = ""
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.nameLiveData.observeOnce {
+            assertTrue(it == "${settings.userFirstName} ${settings.userLastName}")
+        }
+    }
+
+    @Test
+    @DisplayName("When no email is given then show a blank string")
+    fun noEmail() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "",
+            userEmail = ""
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.emailLiveData.observeOnce {
+            assertTrue(it.isBlank())
+        }
+    }
+
+    @Test
+    @DisplayName("When email is given then show the email")
+    fun emailProvided() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "",
+            userEmail = "sample@email.com"
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.emailLiveData.observeOnce {
+            assertTrue(it == settings.userEmail)
+        }
+    }
+
+    @Test
+    @DisplayName("When default time values are used, then show them appropriately")
+    fun defaultTimeValues() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "",
+            userEmail = ""
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.timeLiveData.observeOnce {
+            assertTrue(it == "8am - 5pm")
+        }
+    }
+
+    @Test
+    @DisplayName("When a different start time is chosen, then show the times appropriately")
+    fun defaultEndTime() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "",
+            userEmail = "sample@email.com",
+            startTrackingTime = OffsetTime.of(10, 0, 0, 0, ZoneOffset.UTC)
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.timeLiveData.observeOnce {
+            assertTrue(it == "10am - 5pm")
+        }
+    }
+
+    @Test
+    @DisplayName("When a different end time is chosen, then show the times appropriately")
+    fun defaultStartTime() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "",
+            userEmail = "sample@email.com",
+            endTrackingTime = OffsetTime.of(20, 0, 0, 0, ZoneOffset.UTC)
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.timeLiveData.observeOnce {
+            assertTrue(it == "8am - 8pm")
+        }
+    }
+
+    @Test
+    @DisplayName("When a unique start and end time are chosen, then show the times appropriately")
+    fun uniqueTimes() {
+        val settings = Settings(
+            userFirstName = "",
+            userLastName = "",
+            userEmail = "sample@email.com",
+            startTrackingTime = OffsetTime.of(10, 0, 0, 0, ZoneOffset.UTC),
+            endTrackingTime = OffsetTime.of(20, 0, 0, 0, ZoneOffset.UTC)
+        )
+        whenever(mockDao.getSettings()).thenReturn(NonNullLiveData(settings))
+
+        val viewModel = SettingsViewModel(mockDao)
+        viewModel.timeLiveData.observeOnce {
+            assertTrue(it == "10am - 8pm")
         }
     }
 }

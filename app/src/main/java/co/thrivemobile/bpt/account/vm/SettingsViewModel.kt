@@ -7,7 +7,7 @@ import org.threeten.bp.format.DateTimeFormatter
 
 class SettingsViewModel(private val dao: BptDao) : ViewModel() {
 
-    private val timeFormatter = DateTimeFormatter.ofPattern("hh a")
+    private val timeFormatter = DateTimeFormatter.ofPattern("ha")
 
     val nameLiveData = MediatorLiveData<String>().apply {
         value = ""
@@ -32,7 +32,7 @@ class SettingsViewModel(private val dao: BptDao) : ViewModel() {
             val startTimeString = timeFormatter.format(settings.startTrackingTime)
             val endTimeString = timeFormatter.format(settings.endTrackingTime)
 
-            value = "$startTimeString $endTimeString"
+            value = "$startTimeString - $endTimeString".toLowerCase()
         }
     }
 }
