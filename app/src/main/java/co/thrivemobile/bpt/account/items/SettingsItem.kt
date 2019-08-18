@@ -1,3 +1,3 @@
 package co.thrivemobile.bpt.account.items
 
-class SettingsItem : AccountItem
+data class SettingsItem(val name: String = "") : AccountItem

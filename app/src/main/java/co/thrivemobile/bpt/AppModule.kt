@@ -2,6 +2,8 @@ package co.thrivemobile.bpt
 
 import android.os.Build
 import android.text.Html
+import co.thrivemobile.bpt.account.vm.SalutationViewModel
+import co.thrivemobile.bpt.account.vm.SettingsViewModel
 import co.thrivemobile.bpt.entry_form.EntryFormViewModel
 import co.thrivemobile.bpt.info.InfoViewModel
 import co.thrivemobile.bpt.info.vm.ArticleViewModel
@@ -70,4 +72,6 @@ val appModule = module {
     viewModel { SparkViewModel(get(dao), get(nowOffsetDateTime)) }
     viewModel { InfoViewModel(get()) }
     viewModel { ArticleViewModel(get(repository), get(decodeHtmlCharacters)) }
+    viewModel { SalutationViewModel() }
+    viewModel { SettingsViewModel(get(dao)) }
 }

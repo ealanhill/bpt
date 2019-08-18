@@ -10,9 +10,9 @@ import co.thrivemobile.bpt.account.items.ProductivityCardItem
 import co.thrivemobile.bpt.account.vm.ProductivityCardViewModel
 import co.thrivemobile.bpt.databinding.ItemProductivityCardBinding
 
-class ProductivityCardRecyclerView(
+class ProductivityCardAdapter(
     private val viewLifecycleOwner: LifecycleOwner
-) : ListAdapter<ProductivityCardItem, ProductivityCardRecyclerView.ProductivityCardViewHolder>(
+) : ListAdapter<ProductivityCardItem, ProductivityCardAdapter.ProductivityCardViewHolder>(
     CALLBACK
 ) {
 
